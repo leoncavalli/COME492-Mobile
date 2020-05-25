@@ -20,7 +20,7 @@ const screens = {
 
 }
 const LoginStack = createStackNavigator(screens,{defaultNavigationOptions:{
-    headerStyle:{backgroundColor:"#344adb",}
+    headerStyle:{backgroundColor:"white",}
 }});
 
 export default createAppContainer(LoginStack);

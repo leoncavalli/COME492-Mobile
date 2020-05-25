@@ -7,8 +7,8 @@ export default class webview extends React.Component{
     render(){
       return (
         <WebView
-          source={{uri: 'http://google.com.tr'}}
-          style={{marginTop: 20}}
+          source={{uri: '127.0.0.1:8000/arima/'}}
+          
         />
       );}
       

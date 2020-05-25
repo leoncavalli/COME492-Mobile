@@ -18,13 +18,14 @@ const styles = StyleSheet.create({
         shadowOffset:{width:5,height:5},
         shadowColor:'#8cf1f5',
         shadowOpacity:0.2,
-        marginLeft:20,
-        marginRight:20,
+        height:100,
+        width:205,
+        backgroundColor:"#383737",
+        opacity:0.8
         
     },
     cardContent:{
-       marginHorizontal:20,
-       marginVertical:10,
+       
     }
 
 })
