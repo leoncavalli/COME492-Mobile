@@ -7,7 +7,7 @@ export default class webview extends React.Component{
     render(){
       return (
         <WebView
-          source={{uri: '127.0.0.1:8000/arima/'}}
+          source={{uri: 'http://10.0.2.2:8000/'}}
           
         />
       );}

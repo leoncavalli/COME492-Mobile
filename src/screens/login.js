@@ -28,12 +28,15 @@ export default class login extends React.Component {
         this.state = ({
             email: '',
             password: ''
+        }),
+        this.state =({
+            isVisible:false
         })
     }
 
     signinUser = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-            this.props.navigation.navigate('Welcome')
+            this.props.navigation.navigate('Model')
         }).catch(() => {
             if (this.state.email.length == 0 && this.state.password.length == 0) {
                 alert("Please enter your email and password")
@@ -51,11 +54,7 @@ export default class login extends React.Component {
         }
         )
     }
-    
-    state = {
-        isVisible: false, //state of modal default false
-    }
-    
+
     render() {
 
         return (

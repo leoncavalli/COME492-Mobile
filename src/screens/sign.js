@@ -121,7 +121,7 @@ export default class sign extends React.Component{
                         </View >
                     </View>
                
-                <TouchableOpacity rounded onPress={()=>this.props.navigation.navigate('Login')} style={styles.buttonContainer}>
+                <TouchableOpacity rounded onPress={()=>this.props.navigation.navigate('ArimaModel')} style={styles.buttonContainer}>
                     <Text style={styles.buttonText}>Go Back</Text>
                 </TouchableOpacity>
                 </LinearGradient>

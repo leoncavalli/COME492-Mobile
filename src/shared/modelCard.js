@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default function Card(props){
     return(
         <View style={styles.card}>
-            <View style={styles.cardContent}> 
+          <View style={styles.cardContent}> 
                  { props.children }
             </View>
         </View>
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
         shadowOffset:{width:5,height:5},
         shadowColor:'#8cf1f5',
         shadowOpacity:0.2,
-        height: hp('15%'),
-        width: wp('50%'),
+        width: wp('100%'),
+        height: hp('50%'),
         backgroundColor:"#383737",
         opacity:0.8
         

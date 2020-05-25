@@ -1,21 +1,25 @@
 import {createStackNavigator} from 'react-navigation-stack'
 import {createAppContainer} from 'react-navigation'
 import Login from '../screens/login'
-import Welcome from '../screens/welcome'
+import Model from '../screens/modelPage'
 import Sign from '../screens/sign'
 import web from '../screens/webview'
+import ArimaModel from '../screens/arimaModel'
 const screens = {
      Login :{
          screen: Login
      },
-     Welcome :{
-         screen: Welcome
+     Model :{
+         screen: Model
      },
      Sign : {
          screen: Sign
      },
      webview:{
          screen: web
+     },
+     ArimaModel:{
+         screen: ArimaModel
      }
 
 }

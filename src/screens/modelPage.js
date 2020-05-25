@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {View , Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet,Image, ImageBackground } from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Card from '../shared/card'
 import * as firebase from 'firebase'
 const firebaseConfig={
@@ -29,8 +30,8 @@ export default class welcome extends React.Component {
             
             <ImageBackground style={styles.backgroundImage} source={require('../img/bg-signup.jpg')}>
             <View>
-            <Text style={styles.Header}>Welcome</Text>
-                <Text style={styles.Header}>Select Your Forecast Method</Text>
+                        <Text style={styles.Header}>Welcome</Text>
+                        <Text style={styles.Header}>Select Your Forecast Method</Text>
                 
             </View>
             <View style={{
@@ -38,7 +39,7 @@ export default class welcome extends React.Component {
                        
                         }}>
             
-                <TouchableOpacity  style={styles.buttonContainer}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('ArimaModel')}  style={styles.buttonContainer}>
                     <Card><Text style={styles.touchableText}>ARIMA
                     
                     </Text>
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
 
     container : {
         flex :1 ,
-        backgroundColor: '#3498db',
     },
     Header :{
         marginTop:40,
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
         color:'white'
     },
     cardimage:{
-        height:100,
-        width:200,
+        height: hp('15%'),
+        width: wp('50%'),
         marginTop:40,
         borderRadius:6,
         shadowOffset:{width:5,height:5},
