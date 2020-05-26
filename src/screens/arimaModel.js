@@ -23,8 +23,40 @@ export default class arimaModel extends React.Component {
     constructor(props){
         super(props)
         var currentdate = new Date().getDate()
-        this.state = {date: currentdate}
+        this.state = {dateStart: currentdate,
+            dateEnd:currentdate,
+        }
+        this.state=({
+            indexStock:'',
+            indexPeriod:'',
+        stockName: '',
+        periodType:'',
+        text: ''
+        })
       }
+    
+    postData = async () => {
+        fetch('http://127.0.0.1:8000/simpleapi/',{
+
+        method:'POST',
+        body:this.stockName
+        }).then((response)=>response.json())
+        .then((responseJson)=>{this.setState({text: JSON.stringify(responseJson)})}
+        ).catch(function(error) {
+            console.log('There has been a problem with your fetch operation: ' + error.message);
+             // ADD THIS THROW error
+              throw error;
+            });
+
+
+
+    }
+    // _dropdown_4_onSelect(idx, value) {
+    //     // BUG: alert in a modal will auto dismiss and causes crash after reload and touch. @sohobloo 2016-12-1
+    //     //alert(`idx=${idx}, value='${value}'`);
+    //     console.debug(`idx=${idx}, value='${value}'`);
+    //   }
+
     signOutUser = () => firebase.auth().signOut().then(()=>{
         this.props.navigation.navigate('Login') 
     }).catch(function(error) {
@@ -54,9 +86,8 @@ export default class arimaModel extends React.Component {
                             
                             <DatePicker
                                 style={{ width: 200 , height:50,}}
-                                date={this.state.date}
+                                date={this.state.dateStart}
                                 mode="date"
-                                placeholder="select date"
                                 format="YYYY-MM-DD"
                                 minDate="2000-05-01"
                                 maxDate="2025-05-01"
@@ -82,14 +113,13 @@ export default class arimaModel extends React.Component {
                                     }
                                     
                                 }}
-                                onDateChange={(date) => { this.setState({ date: date }) }}
+                                onDateChange={(date) => { this.setState({ dateStart: date }) }}
                             />
                             <Text style={styles.insideText}>Select End Date</Text>
                             <DatePicker
                                 style={{ width: 200, height: 50, }}
-                                date={this.state.date}
+                                date={this.state.dateEnd}
                                 mode="date"
-                                placeholder="select date"
                                 format="YYYY-MM-DD"
                                 minDate="2000-05-01"
                                 maxDate="2025-05-01"
@@ -115,10 +145,10 @@ export default class arimaModel extends React.Component {
                                     }
 
                                 }}
-                                onDateChange={(date) => { this.setState({ date: date }) }}
+                                onDateChange={(date) => { this.setState({ dateEnd: date }) }}
                             />
                             
-                            <ModalDropdown defaultValue="Select Stock Market ..." options={['AKBNK','VKFBNK']} textStyle={{
+                            <ModalDropdown defaultValue="Select Stock Market ..." onSelect={(indexStock, stockName) => this.setState({indexStock,stockName})} options={['akbnk','VKFBNK']} textStyle={{
                                 fontSize:15,
                                 fontWeight:"bold",
                                 color:"white",
@@ -144,7 +174,7 @@ export default class arimaModel extends React.Component {
 
                             
 
-                            <ModalDropdown defaultValue="Select Period Type ..." options={['Daily', 'Weekly','Monthly','Yearly']} textStyle={{
+                            <ModalDropdown defaultValue="Select Period Type ..." onSelect={(indexPeriod, periodType) => this.setState({indexPeriod,periodType})} options={['Daily', 'Weekly','Monthly','Yearly']} textStyle={{
                                 fontSize: 15,
                                 fontWeight: "bold",
                                 color: "white",
@@ -167,8 +197,9 @@ export default class arimaModel extends React.Component {
                                 borderWidth: 5,
                                 borderColor: "white"
                             }} />
+                            <Text style={styles.insideText}>{this.state.dateStart}{"\n"}{this.state.dateEnd}{"\n"}{this.state.stockName}{"\n"}{this.state.periodType}</Text>
                             <TouchableOpacity style={styles.buttonContainer1}>
-                                <Text style={styles.buttonText1}>Go !</Text>
+                                <Text style={styles.buttonText1} onPress={this.postData}>Go !</Text>
                             </TouchableOpacity>
                         </Card>
 
@@ -195,9 +226,10 @@ const styles = StyleSheet.create({
         flex :1 ,
     },
     Header :{
-        marginTop:40,
+        marginTop:20,
         marginLeft:60,
         marginRight:60,
+        marginBottom:30,
         textAlign:"center",
         fontSize:15,
         fontWeight:'bold',
