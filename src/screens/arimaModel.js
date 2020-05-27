@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {View , Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet,Image, ImageBackground } from 'react-native';
+import {View , Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet,Image, ImageBackground,ScrollView,Dimensions } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Card from '../shared/modelCard'
 import DatePicker from 'react-native-datepicker'
 import ModalDropdown from 'react-native-modal-dropdown';
+import HTML from 'react-native-render-html';
 import * as firebase from 'firebase'
 const firebaseConfig={
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
@@ -15,6 +16,7 @@ const firebaseConfig={
     messagingSenderId: "1000055141805",
     appId: "1:1000055141805:web:20fb9b41147af32b399d24"
 };
+
 if(!firebase.apps.length){
     firebase.initializeApp(firebaseConfig);
 }
@@ -31,22 +33,48 @@ export default class arimaModel extends React.Component {
             indexPeriod:'',
         stockName: '',
         periodType:'',
-        text: ''
+        text: '',
+        
         })
       }
+ 
     
     postData = async () => {
-        fetch('http://127.0.0.1:8000/simpleapi/',{
+       
 
-        method:'POST',
-        body:this.stockName
-        }).then((response)=>response.json())
-        .then((responseJson)=>{this.setState({text: JSON.stringify(responseJson)})}
-        ).catch(function(error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-             // ADD THIS THROW error
-              throw error;
-            });
+        fetch('http://192.168.1.35:8000/simpleapi/', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                
+                'startDate':this.state.dateStart,
+                'endDate':this.state.dateEnd,
+                'stock':this.state.stockName,
+                'period':this.state.periodType
+            
+            }
+               
+
+                )
+            }).then((response) => response.json())
+            .then((responseJson) =>  {
+                if(this.state.dateStart != 0 && this.state.dateEnd != 0 && this.state.stockName != 0 && this.state.periodType != 0)
+                {
+                    this.setState({text:responseJson.startDate+responseJson.endDate+responseJson.stock+responseJson.period})
+                }
+                else{
+                    alert("Please select all informations")
+                    return
+                }
+              
+            })
+            .catch((error) => {
+              console.error(error);
+            })
+        ;
 
 
 
@@ -197,7 +225,8 @@ export default class arimaModel extends React.Component {
                                 borderWidth: 5,
                                 borderColor: "white"
                             }} />
-                            <Text style={styles.insideText}>{this.state.dateStart}{"\n"}{this.state.dateEnd}{"\n"}{this.state.stockName}{"\n"}{this.state.periodType}</Text>
+                            <Text style={styles.insideText}>{this.state.dateStart}{"\n"}{this.state.dateEnd}{"\n"}{this.state.stockName}{"\n"}{this.state.periodType}{"\n"}{this.state.text}</Text>
+                            
                             <TouchableOpacity style={styles.buttonContainer1}>
                                 <Text style={styles.buttonText1} onPress={this.postData}>Go !</Text>
                             </TouchableOpacity>

@@ -3,7 +3,7 @@ import {createAppContainer} from 'react-navigation'
 import Login from '../screens/login'
 import Model from '../screens/modelPage'
 import Sign from '../screens/sign'
-import web from '../screens/webview'
+import WebView from '../screens/webview'
 import ArimaModel from '../screens/arimaModel'
 const screens = {
      Login :{
@@ -15,8 +15,8 @@ const screens = {
      Sign : {
          screen: Sign
      },
-     webview:{
-         screen: web
+     WebView:{
+         screen: WebView
      },
      ArimaModel:{
          screen: ArimaModel

@@ -30,7 +30,7 @@ export default class welcome extends React.Component {
             
             <ImageBackground style={styles.backgroundImage} source={require('../img/bg-signup.jpg')}>
             <View>
-                        <Text style={styles.Header}>Welcome</Text>
+        <Text style={styles.Header}>Welcome{'\n'}{this.props.navigation.getParam('name')}</Text>
                         <Text style={styles.Header}>Select Your Forecast Method</Text>
                 
             </View>

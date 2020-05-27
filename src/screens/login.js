@@ -36,7 +36,7 @@ export default class login extends React.Component {
 
     signinUser = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-            this.props.navigation.navigate('Model')
+            this.props.navigation.navigate('Model',{name : this.state.email})
         }).catch(() => {
             if (this.state.email.length == 0 && this.state.password.length == 0) {
                 alert("Please enter your email and password")
