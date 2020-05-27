@@ -37,6 +37,7 @@ export default class login extends React.Component {
     signinUser = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
             this.props.navigation.navigate('Model',{name : this.state.email})
+        
         }).catch(() => {
             if (this.state.email.length == 0 && this.state.password.length == 0) {
                 alert("Please enter your email and password")
@@ -77,10 +78,13 @@ export default class login extends React.Component {
                 fontWeight:"bold",
                 fontSize:20}
                 }>
-                    What is Fin AI?
+                    What is Fin AI ?
                 </Text>
                 <Text style={{color:'white',
                 marginTop:30,
+                marginLeft:5,
+                marginRight:5,
+                marginBottom:5,
                 fontWeight:"bold",
                 fontSize:17}}>
                 Fin AI is an abbreviaton of Finance on Artificial Intelligence.We are creating machine learning models to see the effects of AI in finance markets.You can try our models.
