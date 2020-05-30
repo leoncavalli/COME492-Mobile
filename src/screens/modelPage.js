@@ -55,7 +55,7 @@ export default class welcome extends React.Component {
                        
                         }} >   
                <Image style={styles.cardimage} source={require('../img/ext2.jpg')}/> 
-                <TouchableOpacity  style={styles.buttonContainer}>
+                <TouchableOpacity  style={styles.buttonContainer}  onPress={() => this.props.navigation.navigate('lstmModel')}  >
                     <Card><Text style={styles.touchableText}>LSTM</Text>
                     <Text style={styles.insideText}>Long short-term memory (LSTM) is an artificial recurrent neural network (RNN) architecture used  forecast future values</Text>
                     </Card>

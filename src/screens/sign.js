@@ -121,7 +121,7 @@ export default class sign extends React.Component{
                         </View >
                     </View>
                
-                <TouchableOpacity rounded onPress={()=>this.props.navigation.navigate('ArimaModel')} style={styles.buttonContainer}>
+                <TouchableOpacity rounded onPress={()=>this.props.navigation.navigate('tradeRobot')} style={styles.buttonContainer}>
                     <Text style={styles.buttonText}>Go Back</Text>
                 </TouchableOpacity>
                 </LinearGradient>
@@ -170,10 +170,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         color:"white",
-        paddingVertical:10,
-        marginTop:50,
-        marginLeft:60,
-        marginRight:60,
+        position: 'absolute',
+        bottom: 20,
+        left: 0,
+        right: 0,
+        
     },
     buttonText:{
         textAlign:"center",

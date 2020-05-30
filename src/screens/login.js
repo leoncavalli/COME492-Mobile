@@ -5,10 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useState } from "react";
 import * as firebase from 'firebase'
 import { LinearGradient } from 'expo-linear-gradient';
-
-
-
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const firebaseConfig = {
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
     authDomain: "myproject-d36ff.firebaseapp.com",
@@ -143,7 +140,7 @@ export default class login extends React.Component {
                     <Text style={styles.title} >Haven't signed yet ?</Text><TouchableOpacity onPress={() => this.props.navigation.navigate('Sign')} style={styles.buttonContainer}>
                         <Text style={styles.buttonText}>Register Now!</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { this.setState({ isVisible: true }) }} style={styles.buttonContainer}><Text style={styles.buttonText}>About Us</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => { this.setState({ isVisible: true }) }} style={styles.modalButton}><Text style={styles.buttonText}>About Us</Text></TouchableOpacity>
                 
                     </LinearGradient>
             </KeyboardAvoidingView >
@@ -174,21 +171,27 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 18,
-        marginTop:10,
+        
+        left: 0,
+        right: 0,
+        top:40,
+        
+        
+        
     },
     buttonContainer: {
-
-        paddingVertical: 10,
-
-        marginLeft: 60,
-        marginRight: 60,
+        color:"white",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        top:60
+        
     },
     buttonText: {
         textAlign: "center",
         color: 'black',
         fontWeight: "bold",
         opacity: 1,
-        marginTop:5
     }
     ,
     buttonContainer1: {
@@ -237,5 +240,13 @@ const styles = StyleSheet.create({
         flex:1,
         
     },
+    modalButton:{
+        color:"white",
+        position: 'absolute',
+        bottom: 20,
+        left: 0,
+        right: 0,
+        
+    }
 
 });

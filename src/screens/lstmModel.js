@@ -103,7 +103,7 @@ export default class arimaModel extends React.Component {
                 <ImageBackground style={styles.backgroundImage} source={require('../img/bg-signup.jpg')}>
                     <View>
                         <Text style={styles.Header}>Welcome</Text>
-                        <Text style={styles.Header}>You have selected Arima Model</Text>
+                        <Text style={styles.Header}>You have selected LSTM Model</Text>
 
                     </View>
                     <View style={{
@@ -112,7 +112,7 @@ export default class arimaModel extends React.Component {
                     }}>
 
 
-                        <Card><Text style={styles.touchableText}>ARIMA</Text>
+                        <Card><Text style={styles.touchableText}>LSTM</Text>
 
                             <Text style={styles.insideText}>Select Start Date</Text>
 
