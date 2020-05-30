@@ -4,6 +4,7 @@ import {StackNavigator} from 'react-navigation';
 import * as firebase from 'firebase'
 import { render } from 'react-dom';
 import { LinearGradient } from 'expo-linear-gradient';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const firebaseConfig={
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
     authDomain: "myproject-d36ff.firebaseapp.com",
@@ -91,10 +92,11 @@ export default class sign extends React.Component{
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: '40%'
+                    height:hp( '40%')
                 }}>
                     <Image style={{
-                        flex: 0.7,
+                        flex: 0.8,
+                        marginTop:hp('10%'),
                         resizeMode: 'contain',
                     }} source={require('../img/finai.jpg')} />
                 </View>
@@ -121,7 +123,7 @@ export default class sign extends React.Component{
                         </View >
                     </View>
                
-                <TouchableOpacity rounded onPress={()=>this.props.navigation.navigate('ArimaModel')} style={styles.buttonContainer}>
+                <TouchableOpacity rounded onPress={()=>this.props.navigation.navigate('Login')} style={styles.buttonContainer}>
                     <Text style={styles.buttonText}>Go Back</Text>
                 </TouchableOpacity>
                 </LinearGradient>

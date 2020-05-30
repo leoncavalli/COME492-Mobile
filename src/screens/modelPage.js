@@ -1,10 +1,14 @@
 import * as React from 'react';
-import {View , Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet,Image, ImageBackground } from 'react-native';
-import {StackNavigator} from 'react-navigation';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import Card from '../shared/card'
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ImageBackground, ActivityIndicator } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as firebase from 'firebase'
-const firebaseConfig={
+import { Card, Button } from 'react-native-elements'
+import * as Font from 'expo-font';
+import Swiper from 'react-native-swiper'
+import { LinearGradient } from 'expo-linear-gradient';
+
+const firebaseConfig = {
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
     authDomain: "myproject-d36ff.firebaseapp.com",
     databaseURL: "https://myproject-d36ff.firebaseio.com",
@@ -13,44 +17,76 @@ const firebaseConfig={
     messagingSenderId: "1000055141805",
     appId: "1:1000055141805:web:20fb9b41147af32b399d24"
 };
-if(!firebase.apps.length){
+if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
 export default class welcome extends React.Component {
-    signOutUser = () => firebase.auth().signOut().then(()=>{
-        this.props.navigation.navigate('Login') 
-    }).catch(function(error) {
+    state = {
+        assetsLoaded: false,
+    };
+    async componentDidMount() {
+        await Font.loadAsync({
+
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+            'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+
+
+        });
+        this.setState({ assetsLoaded: true });
+    }
+    signOutUser = () => firebase.auth().signOut().then(() => {
+        this.props.navigation.navigate('Login')
+    }).catch(function (error) {
         alert(error)
         return error;
-      });;
-    render(){
-        return (
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            
-            <ImageBackground style={styles.backgroundImage} source={require('../img/bg-signup.jpg')}>
-            <View>
-                        <Text style={styles.Header}>Welcome</Text>
-                        <Text style={styles.Header}>Select Your Forecast Method</Text>
-                
-            </View>
-            <View style={{
-                       flexDirection: "row",
-                       
-                        }}>
-            
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('ArimaModel')}  style={styles.buttonContainer}>
-                    <Card><Text style={styles.touchableText}>ARIMA
-                    
-                    </Text>
-                    <Text style={styles.insideText}>ARIMA stands for ‘Auto Regressive Integrated Moving Average’ is used to forecast future values.</Text>
-                   
-                    </Card>
-                    
-                </TouchableOpacity>
-                <Image style={styles.cardimage} source={require('../img/ext.jpg')}/>
-            </View>
-            <View style={{
+    });;
+    render() {
+        const { assetsLoaded } = this.state;
+
+        if (assetsLoaded) {
+            return (
+                <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                    <Swiper style={{ marginTop: 25 }} >
+                        <View style={{ height: '70%' }} >
+                            <View>
+                                <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
+                                    ARIMA</Text></View>
+                            <Card image={require('../img/ext.jpg')} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
+                                <Text style={styles.insideText}>
+                                    ARIMA stands for ‘Auto Regressive Integrated Moving Average’ is used to forecast future values.
+                                    </Text>
+                                <TouchableOpacity style={styles.buttonContainer}>
+                                    <Button ViewComponent={LinearGradient} // Don't forget this!
+                                        linearGradientProps={{
+                                            colors: ['#2cbab2', '#64a19d'],
+                                            start: { x: 0, y: 0.5 },
+                                            end: { x: 1, y: 0.5 },
+                                        }} title="Select Model" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+                                </TouchableOpacity>
+                            </Card>
+                        </View>
+                        <View style={{ height: '70%' }} >
+                            <View>
+                                <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
+                                    LSTM</Text></View>
+                            <Card image={require('../img/ext.jpg')} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
+                                <Text style={styles.insideText}>
+                                    Long short-term memory (LSTM) is an artificial RNN architecture used to forecast future values.</Text>
+                                <TouchableOpacity style={styles.buttonContainer}>
+                                    <Button ViewComponent={LinearGradient} // Don't forget this!
+                                        linearGradientProps={{
+                                            colors: ['#2cbab2', '#64a19d'],
+                                            start: { x: 0, y: 0.5 },
+                                            end: { x: 1, y: 0.5 },
+                                        }} title="Select Model" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+                                </TouchableOpacity>
+                            </Card>
+                        </View>
+                    </Swiper>
+
+                    {/* <View style={{
                        flexDirection: "row",
                        
                         }} >   
@@ -62,105 +98,105 @@ export default class welcome extends React.Component {
                          
                  </TouchableOpacity>
                  
-            </View>
-            <TouchableOpacity onPress = {() => this.signOutUser()} style={styles.signoutContainer}><Text style={styles.buttonText}>Sign Out</Text></TouchableOpacity>
-            </ImageBackground>
-            </KeyboardAvoidingView> 
-
-                
-            
-
-        )
+            </View> */}
+                </KeyboardAvoidingView>
+            )
+        }
+        else {
+            return (
+                <View><ActivityIndicator></ActivityIndicator></View>)
+        }
     }
-        
-            
-    }
+
+
+}
 
 const styles = StyleSheet.create({
 
-    container : {
-        flex :1 ,
+    container: {
+        backgroundColor: '#1D1B26',
+        flex: 1,
     },
-    Header :{
-        marginTop:40,
-        marginLeft:60,
-        marginRight:60,
-        textAlign:"center",
-        fontSize:15,
-        fontWeight:'bold',
-        color:'white'
+    Header: {
+        marginTop: 40,
+        marginLeft: 60,
+        marginRight: 60,
+        textAlign: "center",
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'white'
 
     },
-    logo:{
-        width:10,
-        
+    logo: {
+        width: 10,
+
 
     },
-    logoContainer:{
-            alignItems:"center",
-            flexGrow:1,
-            justifyContent:"center"
+    logoContainer: {
+        alignItems: "center",
+        flexGrow: 1,
+        justifyContent: "center"
     },
-    title:{
-        color:'white',
-        textAlign:"center",
-        fontWeight:"bold"
+    title: {
+        color: 'white',
+        textAlign: "center",
+        fontWeight: "bold"
     },
-    buttonContainer:{
-        paddingVertical:10,
-        marginTop:30,
-       
-      
+    buttonContainer: {
+        paddingVertical: 10,
+        marginTop: 10,
+        width: '100%',
     },
-    signoutContainer:{
-        paddingVertical:10,
-        marginTop:100,
+    signoutContainer: {
+        paddingVertical: 10,
+        marginTop: 100,
     },
-    touchableText:{
-        textAlign:"center",
-        color:'white',
-        fontWeight:"bold",
-        opacity:1,
-        marginTop:5,
-        
+    touchableText: {
+        textAlign: "center",
+        color: 'white',
+        fontWeight: "bold",
+        opacity: 1,
+        marginTop: 5,
+
     },
-    buttonText:{
-        textAlign:"center",
-        color:'white',
-        fontWeight:"bold",
-        opacity:1,
-        
+    buttonText: {
+        textAlign: "center",
+        color: 'white',
+        fontWeight: "bold",
+        opacity: 1,
+
     },
-    buttonContainer1:{
-        backgroundColor:'#2980b9',
-        paddingVertical:10,
-        
-        marginLeft:60,
-        marginRight:60,
+    buttonContainer1: {
+        backgroundColor: '#2980b9',
+        paddingVertical: 10,
+
+        marginLeft: 60,
+        marginRight: 60,
     },
-    buttonText1:{
-        textAlign:"center",
-        color:'white'
+    buttonText1: {
+        textAlign: "center",
+        color: 'white'
     },
-    cardimage:{
+    cardimage: {
         height: hp('15%'),
         width: wp('50%'),
-        marginTop:40,
-        borderRadius:6,
-        shadowOffset:{width:5,height:5},
-        shadowColor:'#8cf1f5',
-        shadowOpacity:0.2,
+        marginTop: 40,
+        borderRadius: 6,
+        shadowOffset: { width: 5, height: 5 },
+        shadowColor: '#8cf1f5',
+        shadowOpacity: 0.2,
     },
-    backgroundImage:{
-        flex:1,
-        resizeMode:"cover"
+    backgroundImage: {
+        flex: 1,
+        resizeMode: "cover"
     },
-    insideText:{
-        color:'white',
-        fontWeight:"bold",
-        opacity:1,
-        marginTop:3,
-        marginLeft:10,
-        fontSize:12,
+    insideText: {
+        fontFamily: 'opensans-regular',
+        width: '100%',
+        textAlign: "center",
+        color: 'black',
+        opacity: 1,
+        marginTop: 3,
+        fontSize: 20,
     }
 });

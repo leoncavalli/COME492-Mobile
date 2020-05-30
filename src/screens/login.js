@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback,Keyboard} from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback,Keyboard, ActivityIndicator} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons'
 import { useState } from "react";
 import * as firebase from 'firebase'
 import { LinearGradient } from 'expo-linear-gradient';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import * as Font from 'expo-font';
+
 
 
 
@@ -23,6 +26,20 @@ if (!firebase.apps.length) {
 }
 
 export default class login extends React.Component {
+    state = {
+        assetsLoaded: false,
+    };
+    async componentDidMount() {
+        await Font.loadAsync({
+
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+            'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+
+
+        });
+        this.setState({ assetsLoaded: true });
+    }
     constructor(props) {
         super(props)
         this.state = ({
@@ -36,7 +53,7 @@ export default class login extends React.Component {
 
     signinUser = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-            this.props.navigation.navigate('Model')
+            this.props.navigation.navigate('HomeStack')
         }).catch(() => {
             if (this.state.email.length == 0 && this.state.password.length == 0) {
                 alert("Please enter your email and password")
@@ -56,7 +73,8 @@ export default class login extends React.Component {
     }
 
     render() {
-
+        const { assetsLoaded } = this.state;    
+        if(assetsLoaded){
         return (
 
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
@@ -97,19 +115,20 @@ export default class login extends React.Component {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: '40%'
+                    height: hp('40%')
                 }}>
                     <Image style={{
-                        flex: 0.7,
+                        flex: 0.8,
+                        marginTop:hp('10%'),
                         resizeMode: 'contain',
                     }} source={require('../img/finai.jpg')} />
                 </View>
-                <LinearGradient style={{height:'60%'}}colors={['rgba(255,255,255,1)', 'rgba(246,246,246,1)', 'rgba(102,102,102,1)']} locations={[0,0.10,1]}>
+                <LinearGradient style={{height:hp('70%')}}colors={['rgba(255,255,255,1)','rgba(240,240,240,1)', 'rgba(180,180,180,1)', 'rgba(102,102,102,1)']} locations={[0,0.10,0.50,1]}>
                     <View>
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                         <View style={{ paddingTop: 50 }}>
                             
-                            <TextInput placeholder=" E-mail" placeholderTextColor='rgba(155,155,155,0.9)'
+                            <TextInput placeholder=" E-mail" placeholderTextColor='rgba(120,125,135,0.9)'
 
                                 returnKeyType={"next"} keyboardType="email-address"
                                 autoCorrect={false} blurOnSubmit={false}
@@ -120,7 +139,7 @@ export default class login extends React.Component {
 
                             </TextInput>
                             
-                            <TextInput placeholder="Password" placeholderTextColor='rgba(155,155,155,0.9)'
+                            <TextInput placeholder="Password"  placeholderTextColor='rgba(120,125,135,0.9)'
                                 secureTextEntry
                                 ref={ref => this.password = ref}
                                 style={styles.inputtext}
@@ -136,14 +155,20 @@ export default class login extends React.Component {
                         </View >
                         </TouchableWithoutFeedback>   
                     </View>
-                    <Text style={styles.title} >Haven't signed yet ?</Text><TouchableOpacity onPress={() => this.props.navigation.navigate('Sign')} style={styles.buttonContainer}>
+                    <Text style={styles.title} >Haven't signed yet ?</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Sign')} style={styles.buttonContainer}>
                         <Text style={styles.buttonText}>Register Now!</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { this.setState({ isVisible: true }) }} style={styles.buttonContainer}><Text style={styles.buttonText}>About Us</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => { this.setState({ isVisible: true }) }} style={styles.buttonContainer}>
+                        <Text style={styles.buttonText}>About Us</Text>
+                    </TouchableOpacity>
                 
                     </LinearGradient>
             </KeyboardAvoidingView >
-        )
+        )}
+        else{
+            return(<View><ActivityIndicator></ActivityIndicator></View>)
+        }
     }
 }
 
@@ -166,36 +191,38 @@ const styles = StyleSheet.create({
 
     },
     title: {
+        fontFamily: 'opensans-light',
         color: 'white',
         textAlign: "center",
-        fontWeight: "bold",
         fontSize: 18,
-        marginTop:10,
+        marginTop:20,
+        marginBottom:5
     },
     buttonContainer: {
+        width:wp('30%'),
+        marginBottom:10,
+        marginTop:10,
+        alignSelf:"center",
 
-        paddingVertical: 10,
-
-        marginLeft: 60,
-        marginRight: 60,
     },
     buttonText: {
+        fontFamily: 'opensans-bold',
         textAlign: "center",
         color: 'black',
-        fontWeight: "bold",
         opacity: 1,
-        marginTop:5
     }
     ,
     buttonContainer1: {
         borderRadius:5,
         backgroundColor: '#2cbab2',
         paddingVertical: 10,
-
-        marginLeft: 60,
-        marginRight: 60,
+        width:wp('65%'),
+        alignSelf:"center"
     },
     buttonText1: {
+        fontFamily: 'opensans-bold',
+
+        fontSize:25,
         textAlign: "center",
         color: 'white'
     },
@@ -204,21 +231,23 @@ const styles = StyleSheet.create({
         padding:5,
         fontSize:20,
         borderRadius:5,
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        borderBottomWidth:1,
+        borderBottomColor:'black',
+        backgroundColor: 'transparent',
         marginBottom: 20,
         marginLeft: 60,
         marginRight: 60,
 
     },
     modalToggle: {
-        
+        flex:1,
         borderWidth: 1,
         borderColor: '#f2f2f2',
         padding: 10,
         borderRadius: 10,
         alignSelf: "center",
         backgroundColor:"black",
-        opacity:0.8
+        opacity:1
     },
     modalContainer: {
         flex: 1,

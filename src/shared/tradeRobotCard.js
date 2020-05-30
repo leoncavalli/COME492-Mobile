@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         shadowColor:'#8cf1f5',
         shadowOpacity:0.2,
         width: wp('100%'),
-        height: hp('73%'),
+        height: hp('65%'),
         backgroundColor:"#383737",
         opacity:0.8
         
