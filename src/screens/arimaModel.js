@@ -39,8 +39,9 @@ export default class arimaModel extends React.Component {
             indexPeriod: '',
             stockName: '',
             periodType: '',
-            text: '',
-            selectedItems: []
+            selectedItems: [],
+            data:[],
+            array:[]
         })
 
 
@@ -60,10 +61,10 @@ export default class arimaModel extends React.Component {
             },
             body: JSON.stringify({
 
-                'startDate': this.state.dateStart,
-                'endDate': this.state.dateEnd,
-                'stock': this.state.stockName,
-                'period': this.state.periodType
+                "startDate": this.state.dateStart,
+                "endDate": this.state.dateEnd,
+                "stock": this.state.stockName,
+                "period": this.state.periodType
 
             }
 
@@ -72,13 +73,17 @@ export default class arimaModel extends React.Component {
         }).then((response) => response.json())
             .then((responseJson) => {
                 if (this.state.dateStart != 0 && this.state.dateEnd != 0 && this.state.stockName != 0 && this.state.periodType != 0) {
-                    this.setState({ text: responseJson.startDate + responseJson.endDate + responseJson.stock + responseJson.period })
+                    this.setState({ array: responseJson.data })
                 }
                 else {
                     alert("Please select all informations")
                     return
                 }
 
+            }).then(()=>{
+            
+                this.props.navigation.navigate('ArimaResult',{data: this.state.array})
+                
             })
             .catch((error) => {
                 console.error(error);
@@ -120,8 +125,8 @@ export default class arimaModel extends React.Component {
                                 style={{ width: wp('55%'), height: hp('7%'), }}
                                 date={this.state.dateStart}
                                 mode="date"
-                                format="YYYY-MM-DD"
-                                minDate="2000-05-01"
+                                format="DD/MM/YYYY"
+                                minDate="01/05/2000"
                                 maxDate={this.state.currentdate}
                                 confirmBtnText="Confirm"
                                 cancelBtnText="Cancel"
@@ -152,8 +157,8 @@ export default class arimaModel extends React.Component {
                                 style={{ width: wp('55%'), height: hp('7%'), }}
                                 date={this.state.dateEnd}
                                 mode="date"
-                                format="YYYY-MM-DD"
-                                minDate="2000-05-01"
+                                format="DD/MM/YYYY"
+                                minDate="01/05/2000"
                                 maxDate={this.state.currentdate}
                                 confirmBtnText="Confirm"
                                 cancelBtnText="Cancel"
@@ -320,7 +325,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         alignSelf: "flex-end",
         position: 'absolute',
-        bottom: 0,
+        bottom: 80,
         right: 0,
         width: 100,
 

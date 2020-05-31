@@ -47,8 +47,7 @@ export default class arimaModel extends React.Component {
             stockName: '',
             periodType: '',
             text: '',
-            data: [upData]
-
+            data: [upData],
         })
     }
     postData = async () => {
@@ -81,15 +80,11 @@ export default class arimaModel extends React.Component {
         return (
             <View style={styles.container}>
                 <Plotly
-                data={this.state.data}
+                data={this.props.route.params.data}
                 onLoad={() => console.log('loaded')}
                 debug
                 enableFullPlotly
                  />
-                <TouchableOpacity style={styles.buttonContainer1} onPress={this.postData}>
-                    <Text style={styles.buttonText1} >Go !</Text>
-
-                </TouchableOpacity>
             </View>)
     }
 

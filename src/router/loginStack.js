@@ -9,6 +9,7 @@ import Sign from '../screens/sign'
 import About from '../screens/about'
 import Trader from '../screens/trader'
 import ArimaModel from '../screens/arimaModel'
+import ArimaResult from '../screens/arimaResult'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
 import * as React from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
@@ -36,8 +37,9 @@ const Tab = createMaterialBottomTabNavigator();
 function ModelStackScreen() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="ModelPage " component={Model} options={{headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="ModelPage" component={Model} options={{headerTitle: props => <LogoTitle {...props} />}} />
             <Stack.Screen name="ArimaModel" component={ArimaModel} options={{headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="ArimaResult" component={ArimaResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
         </Stack.Navigator>
     )
 }
