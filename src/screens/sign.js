@@ -65,27 +65,7 @@ export default class sign extends React.Component{
                 
                 
                 
-                
-                {/* <TextInput placeholder="Name" placeholderTextColor="rgba(255,255,255,0.5)"
-                 returnKeyType={"next"} blurOnSubmit={false}
-                 onSubmitEditing={() => { this.Surname.focus(); }}
-                 autoCorrect={false} 
-                 onChangeText={(name)=> this.setState({name})} 
-                 style={styles.input}/>
-                <TextInput placeholder="Surname" placeholderTextColor="rgba(255,255,255,0.5)" 
-                returnKeyType={"next"} ref = {ref => this.Surname = ref}
-                blurOnSubmit={false}
-                onSubmitEditing={() => { this.Username.focus(); }}
-                autoCorrect={false}
-                onChangeText={(surname)=> this.setState({surname})} 
-                style={styles.input}/>
-                <TextInput placeholder="Username" placeholderTextColor="rgba(255,255,255,0.5)" 
-                returnKeyType={"next"} ref = {ref => this.Username = ref}
-                blurOnSubmit={false}
-                onSubmitEditing={() => { this.email.focus(); }}
-                autoCorrect={false}  
-                onChangeText={(username)=> this.setState({username})} 
-                style={styles.input}/> */}
+ 
                 
                 <View style={{
                     backgroundColor: 'white',
@@ -143,7 +123,9 @@ const styles = StyleSheet.create({
         padding:5,
         fontSize:20,
         borderRadius:5,
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        borderBottomWidth:1,
+        borderBottomColor:'black',
+        backgroundColor: 'transparent',
         marginBottom: 20,
         marginLeft: 60,
         marginRight: 60,
@@ -188,11 +170,13 @@ const styles = StyleSheet.create({
         borderRadius:5,
         backgroundColor: '#2cbab2',
         paddingVertical: 10,
-
-        marginLeft: 60,
-        marginRight: 60,
+        width:wp('65%'),
+        alignSelf:"center"
     },
     buttonText1: {
+        fontFamily: 'opensans-bold',
+
+        fontSize:25,
         textAlign: "center",
         color: 'white'
     },

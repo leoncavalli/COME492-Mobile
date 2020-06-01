@@ -6,7 +6,19 @@ import { useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as Font from 'expo-font';
-
+import * as firebase from 'firebase'
+const firebaseConfig = {
+    apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
+    authDomain: "myproject-d36ff.firebaseapp.com",
+    databaseURL: "https://myproject-d36ff.firebaseio.com",
+    projectId: "myproject-d36ff",
+    storageBucket: "myproject-d36ff.appspot.com",
+    messagingSenderId: "1000055141805",
+    appId: "1:1000055141805:web:20fb9b41147af32b399d24"
+};
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
 
 
@@ -14,6 +26,12 @@ import * as Font from 'expo-font';
 
 
 export default class about extends React.Component {
+    signOutUser = () => firebase.auth().signOut().then(() => {
+        this.props.navigation.navigate('Login')
+    }).catch(function (error) {
+        alert(error)
+        return error;
+    });;
 
 
 
@@ -23,6 +41,9 @@ export default class about extends React.Component {
 
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
                <View><Text style={{textAlign:"center",marginTop:150}}>About</Text></View>
+                <TouchableOpacity onPress={() => this.signOutUser()} style={styles.buttonContainer1}>
+                    <Text style={styles.buttonText1}>Log Out</Text>
+                </TouchableOpacity>
 
             </KeyboardAvoidingView >
         )
@@ -61,6 +82,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         alignSelf: "center",
+        color:'#2cbab2'
 
     },
     buttonText: {
@@ -71,14 +93,14 @@ const styles = StyleSheet.create({
     ,
     buttonContainer1: {
         borderRadius: 5,
-        backgroundColor: '#2cbab2',
+        color:'#2cbab2',
         paddingVertical: 10,
         width: wp('65%'),
         alignSelf: "center"
     },
     buttonText1: {
 
-        fontSize: 25,
+        fontSize: 15,
         textAlign: "center",
         color: 'white'
     },
@@ -117,6 +139,14 @@ const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
 
+    },
+     buttonContainer1: {
+        backgroundColor: '#2980b9',
+        paddingVertical: 10,
+        top:400,
+        left:140,
+        right:0,
+        width:100
     },
 
 });

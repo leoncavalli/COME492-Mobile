@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
         borderRadius:6,
         elevation:3,
         shadowOffset:{width:5,height:5},
-        shadowColor:'#8cf1f5',
+       
         shadowOpacity:0.2,
         height: hp('15%'),
-        width: wp('50%'),
+        width: wp('90%'),
         backgroundColor:"#383737",
         opacity:0.8
         

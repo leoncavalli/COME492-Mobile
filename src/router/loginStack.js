@@ -10,6 +10,7 @@ import About from '../screens/about'
 import Trader from '../screens/trader'
 import ArimaModel from '../screens/arimaModel'
 import ArimaResult from '../screens/arimaResult'
+import TradeRobott from '../screens/tradeRobot'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
 import * as React from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
@@ -40,6 +41,7 @@ function ModelStackScreen() {
             <Stack.Screen name="ModelPage" component={Model} options={{headerTitle: props => <LogoTitle {...props} />}} />
             <Stack.Screen name="ArimaModel" component={ArimaModel} options={{headerTitle: props => <LogoTitle {...props} />}} />
             <Stack.Screen name="ArimaResult" component={ArimaResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
+            
         </Stack.Navigator>
     )
 }
@@ -70,7 +72,7 @@ function MyTabs() {
             }}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Model" component={ModelStackScreen} />
-            <Tab.Screen name="Trade Robot" component={Trader} />
+            <Tab.Screen name="Trade Robot" component={TradeRobott} />
             <Tab.Screen name="About" component={About} />
         </Tab.Navigator>
     );
@@ -82,6 +84,7 @@ function LoginStackScreen() {
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="Sign" component={Sign} options={{ headerShown: false }} />
             <Stack.Screen name="HomeStack" component={MyTabs} options={{ headerShown: false }} />
+            
         </Stack.Navigator>
     )
 }

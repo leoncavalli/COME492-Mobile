@@ -6,6 +6,7 @@ import Model from '../screens/modelPage'
 import Sign from '../screens/sign'
 import web from '../screens/webview'
 import ArimaModel from '../screens/arimaModel'
+import TradeRobot from '../screens/tradeRobot'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
 import * as React from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
@@ -20,6 +21,7 @@ function MyTabs() {
         
         <Tab.Screen name="Model" component={Model} />
         <Tab.Screen name="ArimaModel" component={ArimaModel} />
+       
       </Tab.Navigator>
     );
   }

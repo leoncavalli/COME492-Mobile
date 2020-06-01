@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ImageBackground,TouchableWithoutFeedback,Keyboard } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ImageBackground,TouchableWithoutFeedback,Keyboard,Slider } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Card from '../shared/tradeRobotCard'
@@ -28,7 +28,9 @@ export default class trader extends React.Component {
         super(props)
        
         this.state = ({
-            
+            budget:'0',
+            minimumValue:'5000',
+            maximumValue:'100000'
            
         })
        
@@ -137,8 +139,22 @@ export default class trader extends React.Component {
                                     height: hp ('50%')
                                 }}
                             />
-                           
-                             
+                        
+                           <Slider
+                                    style={{ width: wp('75%'), height: hp('5%'), position: "absolute", left: 40, right: 40, top: 250 }}
+                                    step={1}
+                                    maximumValue={this.state.maximumValue}
+                                    minimumValue={this.state.minimumValue}
+                                    value={this.state.minimumValue}
+                                    onValueChange={val => this.setState({ budget: val })}
+                                    
+                                    thumbTintColor='#2cbab2'
+                                    maximumTrackTintColor='#d3d3d3'
+                                    minimumTrackTintColor='#2cbab2'
+
+                                />
+
+                            <Text style={{textAlign:"center",position:"absolute",top:300,left:40,right:40,color:"white",fontSize:15,fontWeight:"bold"}}>Your budget : {this.state.budget} $</Text>
 
                             
                                 

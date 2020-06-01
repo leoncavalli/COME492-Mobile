@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ImageBackground,TouchableWithoutFeedback,Keyboard } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image,ScrollView, ImageBackground, ActivityIndicator,TouchableWithoutFeedback,Keyboard,Slider } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Card from '../shared/tradeRobotCard'
-import DatePicker from 'react-native-datepicker'
-import ModalDropdown from 'react-native-modal-dropdown';
-import HTML from 'react-native-render-html';
-import MultiSelect from 'react-native-multiple-select';
 import * as firebase from 'firebase'
+import { Card,  Button } from 'react-native-elements'
+import * as Font from 'expo-font';
+import Swiper from 'react-native-swiper'
+import { LinearGradient } from 'expo-linear-gradient';
+import MultiSelect from 'react-native-multiple-select';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
@@ -18,27 +18,32 @@ const firebaseConfig = {
     messagingSenderId: "1000055141805",
     appId: "1:1000055141805:web:20fb9b41147af32b399d24"
 };
-
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 const customData = require('../shared/bist100.json');
-
-export default class arimaModel extends React.Component {
-    constructor(props) {
-        super(props)
+export default class welcome extends React.Component {
+    state = {
+        assetsLoaded: false,
+    };
+    state = ({
+        budget:'0',
+        minimumValue:'5000',
+        maximumValue:'100000',
+        selectedItems:[]
        
-        this.state = ({
-            
-           
-        })
-       
-        
+    })
+    async componentDidMount() {
+        await Font.loadAsync({
+
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+            'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
 
 
+        });
+        this.setState({ assetsLoaded: true });
     }
-
- 
     postData = async () => {
 
 
@@ -51,7 +56,7 @@ export default class arimaModel extends React.Component {
             body: JSON.stringify({
 
                 'selectedItems': this.state.selectedItems,
-               
+
 
             }
 
@@ -59,7 +64,7 @@ export default class arimaModel extends React.Component {
             )
         }).then((response) => response.json())
             .then((responseJson) => {
-                if (this.state.selectedItems != 0 ) {
+                if (this.state.selectedItems != 0) {
                     this.setState({ text: responseJson.selectedItems })
                 }
                 else {
@@ -84,29 +89,22 @@ export default class arimaModel extends React.Component {
         return error;
     });;
     render() {
-        const { selectedItems } = this.state;
-        return (
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}> 
-                <ImageBackground style={styles.backgroundImage} source={require('../img/bg-signup.jpg')}>
-                    <View>
-                        <Text style={styles.Header}>Welcome</Text>
-                        <Text style={styles.Header}>You have selected Arima Model</Text>
-
-                    </View>
-                    <View style={{
-                        flexDirection: "row",
-
-                    }}>
-
-                        
-                        <Card><Text style={styles.touchableText}>ARIMA</Text>
-
-                           
+        const { assetsLoaded } = this.state;
+        const {selectedItems} = this.state;
+        if (assetsLoaded) {
+            return (
+                <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                 
+                        <View >
+                            <View>
+                                <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
+                                    TRADE</Text></View>
+                            <Card height={hp('70%')}>
                             <MultiSelect
                                 hideTags
+                                ref={(component) => { this.multiSelect = component }}
                                 items={customData}
-                                uniqueKey="Name"
+                                uniqueKey="Symbol"
                                 onSelectedItemsChange={(selectedItems)=>{this.setState({selectedItems})}}
                                 selectedItems={selectedItems}
                                 selectText="  Pick Items"
@@ -123,10 +121,13 @@ export default class arimaModel extends React.Component {
                                 submitButtonColor="#CCC"
                                 submitButtonText="Submit"
                                 styleDropdownMenu={{
-                                    width: wp('85%'),
+                                    width: wp('75%'),
                                     marginLeft : wp('5%'),
                                     marginTop : wp('5%'),
                                     
+                                }}
+                                searchInputStyle={{
+                                    height:50
                                 }}
                                 
                                 styleDropdownMenuSubsection={
@@ -135,33 +136,62 @@ export default class arimaModel extends React.Component {
                                     }
                                 }
                                 styleListContainer={{
-                                    height: hp ('50%')
+                                    height: hp ('30%')
                                 }}
                             />
-                           
-                             
-
+                            <View style={{height:hp('26%')}}><ScrollView >
+                            {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedItems)}
+                            </ScrollView></View>
                             
-                                
-
-                        </Card>
                         
-                        
+                           <Slider
+                                    style={{ width: wp('75%'), height: hp('5%'), position: "absolute", left:10, right: 50, top: 300 }}
+                                    step={1}
+                                    maximumValue={this.state.maximumValue}
+                                    minimumValue={this.state.minimumValue}
+                                    value={this.state.minimumValue}
+                                    onValueChange={val => this.setState({ budget: val })}
+                                    
+                                    thumbTintColor='#2cbab2'
+                                    maximumTrackTintColor='#d3d3d3'
+                                    minimumTrackTintColor='#2cbab2'
 
+                                />
 
-                    </View>
-                    <TouchableOpacity style={styles.buttonContainer1}>
-                                    <Text style={styles.buttonText1} onPress={() => this.props.navigation.navigate('ArimaModel')}>Go !</Text>
+                            <Text style={{textAlign:"center",position:"absolute",top:330,left:60,
+                            right:60,color:"black",fontSize:15,fontWeight:"bold"}}>Your budget : {this.state.budget} $</Text>
+                                <TouchableOpacity style={styles.buttonContainer}>
+                                    <Button ViewComponent={LinearGradient} // Don't forget this!
+                                        linearGradientProps={{
+                                            colors: ['#2cbab2', '#64a19d'],
+                                            start: { x: 0, y: 0.5 },
+                                            end: { x: 1, y: 0.5 },
+                                        }} title="Select Model" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
                                 </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.signOutUser()} style={styles.signoutContainer}><Text style={styles.buttonText}>Sign Out</Text></TouchableOpacity>
-                </ImageBackground>
-                </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
-
- 
+                            </Card>
+                        </View>
 
 
-        )
+                    {/* <View style={{
+                       flexDirection: "row",
+                       
+                        }} >   
+               <Image style={styles.cardimage} source={require('../img/ext2.jpg')}/> 
+                <TouchableOpacity  style={styles.buttonContainer}>
+                    <Card><Text style={styles.touchableText}>LSTM</Text>
+                    <Text style={styles.insideText}>Long short-term memory (LSTM) is an artificial recurrent neural network (RNN) architecture used  forecast future values</Text>
+                    </Card>
+                         
+                 </TouchableOpacity>
+                 
+            </View> */}
+                </KeyboardAvoidingView>
+            )
+        }
+        else {
+            return (
+                <View><ActivityIndicator></ActivityIndicator></View>)
+        }
     }
 
 
@@ -170,13 +200,13 @@ export default class arimaModel extends React.Component {
 const styles = StyleSheet.create({
 
     container: {
+        backgroundColor: '#1D1B26',
         flex: 1,
     },
     Header: {
-        
+        marginTop: 40,
         marginLeft: 60,
         marginRight: 60,
-        marginBottom: 30,
         textAlign: "center",
         fontSize: 15,
         fontWeight: 'bold',
@@ -200,22 +230,22 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         paddingVertical: 10,
-        marginTop: 30,
-
-
+        position:"absolute",
+        top:380,
+        width: '100%',
+        
+        
     },
     signoutContainer: {
-        position: 'absolute',
-        bottom:2,
-        left: 0,
-        right: 0,
+        paddingVertical: 10,
+        marginTop: 100,
     },
     touchableText: {
         textAlign: "center",
         color: 'white',
         fontWeight: "bold",
         opacity: 1,
-        marginTop: 15,
+        marginTop: 5,
 
     },
     buttonText: {
@@ -226,25 +256,19 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer1: {
-        backgroundColor: '#2cbab2',
+        backgroundColor: '#2980b9',
         paddingVertical: 10,
-        alignSelf:'flex-end',
-        position: 'absolute',
-        bottom:73,
-        right: 0,
-        width: 100,
-       
 
+        marginLeft: 60,
+        marginRight: 60,
     },
     buttonText1: {
         textAlign: "center",
-        color: 'white',
-        fontWeight: "bold"
-
+        color: 'white'
     },
     cardimage: {
-        height: 100,
-        width: 200,
+        height: hp('15%'),
+        width: wp('50%'),
         marginTop: 40,
         borderRadius: 6,
         shadowOffset: { width: 5, height: 5 },
@@ -256,12 +280,12 @@ const styles = StyleSheet.create({
         resizeMode: "cover"
     },
     insideText: {
-        color: 'white',
-        fontWeight: "bold",
+        fontFamily: 'opensans-regular',
+        width: '100%',
+        textAlign: "center",
+        color: 'black',
         opacity: 1,
-        marginTop: 10,
-        marginLeft: 68,
-        marginBottom: 3,
-        fontSize: 12,
+        marginTop: 3,
+        fontSize: 20,
     }
 });
