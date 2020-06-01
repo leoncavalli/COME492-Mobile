@@ -9,18 +9,7 @@ import Swiper from 'react-native-swiper'
 import { LinearGradient } from 'expo-linear-gradient';
 import MultiSelect from 'react-native-multiple-select';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
-    authDomain: "myproject-d36ff.firebaseapp.com",
-    databaseURL: "https://myproject-d36ff.firebaseio.com",
-    projectId: "myproject-d36ff",
-    storageBucket: "myproject-d36ff.appspot.com",
-    messagingSenderId: "1000055141805",
-    appId: "1:1000055141805:web:20fb9b41147af32b399d24"
-};
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+
 const customData = require('../shared/bist100.json');
 export default class welcome extends React.Component {
     state = {
@@ -28,8 +17,8 @@ export default class welcome extends React.Component {
     };
     state = ({
         budget:'0',
-        minimumValue:'5000',
-        maximumValue:'100000',
+        minimumValue:5000,
+        maximumValue:100000,
         selectedItems:[]
        
     })
@@ -81,13 +70,6 @@ export default class welcome extends React.Component {
 
 
     }
-
-    signOutUser = () => firebase.auth().signOut().then(() => {
-        this.props.navigation.navigate('Login')
-    }).catch(function (error) {
-        alert(error)
-        return error;
-    });;
     render() {
         const { assetsLoaded } = this.state;
         const {selectedItems} = this.state;
