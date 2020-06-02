@@ -70,7 +70,7 @@ function MyTabs() {
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={Home}/>
             <Tab.Screen name="Model" component={ModelStackScreen} />
             <Tab.Screen name="Trade Robot" component={TradeRobott} />
             <Tab.Screen name="About" component={About} />

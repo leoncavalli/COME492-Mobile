@@ -1,31 +1,68 @@
 import * as React from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, Image, ImageBackground, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons'
 import { useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as Font from 'expo-font';
-
-
-
-
+import Constants from 'expo-constants';
 
 
 
 export default class Home extends React.Component {
+    state = {
+        assetsLoaded: false,
+    };
+    async componentDidMount() {
+        await Font.loadAsync({
 
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+            'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+
+
+        });
+        this.setState({ assetsLoaded: true });
+    }
 
 
 
     render() {
-        return (
+        const { assetsLoaded } = this.state;
+        if (assetsLoaded) {
+            return (
+                <SafeAreaView style={styles.container}>
+                    <ScrollView style={styles.scrollView}>
+                        <ImageBackground source={require('../img/background.jpg')} style={styles.image}>
+                            <LinearGradient style={{ height: hp('80%') }} colors={['rgba(22, 22, 22, 0.3)', 'rgba(14, 14, 14, 0.7)', 'rgba(11, 11, 11,1)']} locations={[0.10, 0.75, 1]}>
+                                <Text style={styles.text}>
+                                    We are developing financial AI.
+                              </Text>
+                            </LinearGradient>
 
-            <KeyboardAvoidingView behavior="padding" style={styles.container} >
-               <View><Text style={{textAlign:"center",marginTop:150}}>Home</Text></View>
-
-            </KeyboardAvoidingView >
-        )
+                        </ImageBackground>
+                        <LinearGradient style={{ height: hp('70%') }} colors={[' rgba(11, 11, 11,1)', 'rgba(22, 22, 22, 0.9)', 'rgba(22, 22, 22, 0.8)']} locations={[0.10, 0.75, 1]}>
+                            <View style={styles.headerWrapper}>
+                                <Text style={styles.headerText} >What is FinAI?</Text>
+                            </View>
+                            <View style={styles.infoWrapper}>
+                            <Text style={styles.infoText}>
+                                Fin AI is an abbreviaton of Finance on Artificial
+                                 Intelligence.We are creating machine learning models to
+                                 see the effects of AI in finance markets.
+                            </Text>
+                            </View>
+                        </LinearGradient>
+                    </ScrollView>
+                </SafeAreaView>
+            )
+        }
+        else {
+            return (
+                <ActivityIndicator></ActivityIndicator>
+            )
+        }
     }
 
 }
@@ -35,88 +72,48 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-
+        marginTop: Constants.statusBarHeight,
     },
-    logo: {
-
-        width: 320,
-        height: 150,
+    image: {
+        flex: 1,
+        height: hp('80%'),
+        resizeMode: 'contain'
     },
-    logoContainer: {
-        alignItems: "center",
-        flexGrow: 1,
-        justifyContent: "center"
-
+    scrollView: {
+        backgroundColor: 'white',
     },
-    title: {
+    text: {
         color: 'white',
-        textAlign: "center",
-        fontSize: 18,
-        marginTop: 20,
-        marginBottom: 5
-    },
-    buttonContainer: {
-        width: wp('30%'),
-        marginBottom: 10,
-        marginTop: 10,
-        alignSelf: "center",
+        letterSpacing: 1.625,
+        paddingLeft: 10,
 
+        top: hp('10%'),
+        fontFamily: 'opensans-light',
+        fontSize: 60,
     },
-    buttonText: {
-        textAlign: "center",
-        color: 'black',
-        opacity: 1,
-    }
-    ,
-    buttonContainer1: {
-        borderRadius: 5,
-        backgroundColor: '#2cbab2',
-        paddingVertical: 10,
-        width: wp('65%'),
+    headerWrapper:
+    {
+        borderBottomWidth: 5,
+        borderBottomColor: '#64a19d',
+        paddingBottom: 10, width: wp('70%'),
         alignSelf: "center"
     },
-    buttonText1: {
-
-        fontSize: 25,
+    headerText: {
+        fontFamily: 'opensans-bold',
+        fontSize: 35, color: 'white',
+        marginTop: 100,
         textAlign: "center",
-        color: 'white'
+        borderBottomColor: '#2cbab2',
     },
-    inputtext: {
-        height: 40,
-        padding: 5,
-        fontSize: 20,
-        borderRadius: 5,
-        borderBottomWidth: 1,
-        borderBottomColor: 'black',
-        backgroundColor: 'transparent',
-        marginBottom: 20,
-        marginLeft: 60,
-        marginRight: 60,
-
+    infoWrapper:{
+        width:wp('90%'),
+        alignSelf:"center",
+        marginTop:20
     },
-    modalToggle: {
-        flex: 1,
-        borderWidth: 1,
-        borderColor: '#f2f2f2',
-        padding: 10,
-        borderRadius: 10,
-        alignSelf: "center",
-        backgroundColor: "black",
-        opacity: 1
+    infoText:{
+        color:'white',
+        fontFamily:'opensans-regular',
+        textAlign:"center",
+        fontSize:25
     },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-
-
-    },
-    innerContainer: {
-        alignItems: 'center',
-    },
-    backgroundImage: {
-        flex: 1,
-
-    },
-
 });
