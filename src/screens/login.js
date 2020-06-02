@@ -78,9 +78,10 @@ export default class login extends React.Component {
         return (
 
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
-                <Modal visible={this.state.isVisible} animationType='slide' transparent={true}>
+                <Modal visible={this.state.isVisible} animationType='slide' transparent={true} >
                 
-                <View  style={styles.modalContainer}>
+                <View  style={{height:hp('50%'),
+        justifyContent: 'center',position:'absolute',top:160,opacity:0.9}}>
                 
                   <View style={styles.modalToggle}>
                  
@@ -90,7 +91,7 @@ export default class login extends React.Component {
                     onPress = {() => {this.setState({ isVisible: false})}}
                  />
                 <Text style={{color:'white',
-                
+                marginTop:15,
                 textAlign:"center",
                 fontWeight:"bold",
                 fontSize:20}
@@ -98,7 +99,7 @@ export default class login extends React.Component {
                     What is Fin AI?
                 </Text>
                 <Text style={{color:'white',
-                marginTop:30,
+                marginTop:60,
                 fontWeight:"bold",
                 fontSize:17}}>
                 Fin AI is an abbreviaton of Finance on Artificial Intelligence.We are creating machine learning models to see the effects of AI in finance markets.You can try our models.
@@ -252,6 +253,7 @@ const styles = StyleSheet.create({
     modalContainer: {
         flex: 1,
         justifyContent: 'center',
+        
         
         
       },

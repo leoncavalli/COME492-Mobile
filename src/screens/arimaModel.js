@@ -240,21 +240,14 @@ export default class arimaModel extends React.Component {
                                       borderColor: "black"
                                   }} />
 
-                                    
+                                <TouchableOpacity style={styles.buttonContainer1}>
+                                    <Text style={styles.buttonText1} onPress={this.postData}>Go !</Text>
+                                </TouchableOpacity>
+
 
                                 </Card>
                             </View>
-                            <View style={{ height: '70%' }} >
-                                <View>
-                                    <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
-                                        ARIMA</Text></View>
-                              
-                                    <TouchableOpacity style={styles.buttonContainer1}>
-                                        <Text style={styles.buttonText1} onPress={this.postData}>Go !</Text>
-                                    </TouchableOpacity>
-
-
-                            </View>
+                            
                     </Swiper>
                 </KeyboardAvoidingView>
 
@@ -330,11 +323,11 @@ const styles = StyleSheet.create({
     buttonContainer1: {
         backgroundColor: '#2cbab2',
         paddingVertical: 10,
-        alignSelf: "center",
+        left:254,
         position: 'absolute',
-        top:200,
-        width: wp('30%'),
-        height:hp('10%')
+        top:144,
+        width: wp('20%'),
+        height:hp('6%')
         
 
     },
@@ -342,7 +335,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: 'white',
         fontWeight: "bold",
-        fontSize:30
+        fontSize:15
 
     },
     cardimage: {

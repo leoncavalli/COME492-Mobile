@@ -41,7 +41,7 @@ export default class about extends React.Component {
 
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
                <View><Text style={{textAlign:"center",marginTop:150}}>About</Text></View>
-                <TouchableOpacity onPress={() => this.signOutUser()} style={styles.buttonContainer1}>
+               <TouchableOpacity onPress={() => this.signOutUser()} style={styles.buttonContainer1}>
                     <Text style={styles.buttonText1}>Log Out</Text>
                 </TouchableOpacity>
 
