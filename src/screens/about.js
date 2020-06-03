@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { MaterialIcons } from '@expo/vector-icons'
-import { useState } from "react";
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator, Slider } from 'react-native';
+import { Button } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as Font from 'expo-font';
 import * as firebase from 'firebase'
+import Constants from 'expo-constants';
+import Swiper from 'react-native-swiper'
+import Card from '../shared/card'
 const firebaseConfig = {
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
     authDomain: "myproject-d36ff.firebaseapp.com",
@@ -32,32 +33,154 @@ export default class about extends React.Component {
         alert(error)
         return error;
     });;
+    state = {
+        assetsLoaded: false,
+    };
+    async componentDidMount() {
+        await Font.loadAsync({
+
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+            'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+
+
+        });
+        this.setState({ assetsLoaded: true });
+    }
 
 
 
 
     render() {
-        return (
+        const { assetsLoaded } = this.state;
+        if(assetsLoaded){return (
 
-            <KeyboardAvoidingView behavior="padding" style={styles.container} >
-               <View><Text style={{textAlign:"center",marginTop:150}}>About</Text></View>
-               <TouchableOpacity onPress={() => this.signOutUser()} style={styles.buttonContainer1}>
-                    <Text style={styles.buttonText1}>Log Out</Text>
-                </TouchableOpacity>
+            <SafeAreaView style={styles.container}>
+                    <ScrollView  loop={false}>
+                        
+                        <LinearGradient style={{ height: 'auto' }} colors={[' rgba(11, 11, 11,1)', 'rgba(22, 22, 22, 0.9)', 'rgba(22, 22, 22, 0.8)']} locations={[0.10, 0.75, 1]}>
+                            <View style={styles.headerWrapper}>
+                                <Text style={styles.headerText} >How to use FinAI ?</Text>
+                            </View>
+                            <View style={styles.infoWrapper}>
+                            <Text style={styles.infoText}>
+                                As Fin AI we provide you two machine learning methods ARIMA and LSTM which are used to forecast future values and also a Trade Robot
+                            </Text>
+                            </View>
+                        <Swiper  >
+                            <View>
+                                <Card >
+                                    <Image source={require('../img/arimaSelect.jpg')} style={{ height: '90%', width: '100%' , resizeMode:"contain" }} />
+                                    <Text style={styles.insideText}>
+                                        After login in there are four tabs : Home , Model , Trade Robot and About. On model tab we can access our two models ARIMA and LSTM
+                                    </Text>
+                                    
+                                   
 
-            </KeyboardAvoidingView >
-        )
+                                </Card>
+                            </View>
+                            <View  >
+                                <Card>
+                                <Image source={require('../img/lstmSelect.jpg')} style={{ height: '90%', width: '100%' , resizeMode:"contain" }} />
+                                    <Text style={styles.insideText}>
+                                        After login in there are four tabs : Home , Model , Trade Robot and About. On model tab we can access our two models ARIMA and LSTM
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View >
+                                <Card >
+                                <Image source={require('../img/stockMarket.jpg')} style={{ height: '86%', width: '100%' , resizeMode:"contain" }} />
+                                    <Text style={styles.insideText}>
+                                        On press select model , each model will require user to specify the same parameters and all parameters must be specified otherwise app will throw error. Stock name is required to get spesific stock market values
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View  >
+                                <Card >
+                                <Image source={require('../img/dates.jpg')} style={{ height: '90%', width: '100%' , resizeMode:"contain" }} />
+                                    <Text style={styles.insideText}>
+                                        Start and end dates also must be specified and keep in mind that start date must be smaller than the end date !
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View  >
+                                <Card >
+                                <Image source={require('../img/period.jpg')} style={{ height: '86%', width: '100%' , resizeMode:"contain" }} />
+                                    <Text style={styles.insideText}>
+                                        Period is where you specify whether you train your set daily , weekly , monthly or yearly . Remember that forecast process time will increase as you go yearly to daily ! After specified all parameters 'Go!' button is ready to Go!!!
+                                    </Text>
+
+                                </Card>
+                            </View>
+                        </Swiper>
+                        <TouchableOpacity onPress={() => this.signOutUser()} style={styles.buttonContainer1}>
+                            <Text style={styles.buttonText1}>Log Out</Text>
+                        </TouchableOpacity>    
+                        </LinearGradient>
+                        
+                    </ScrollView>
+                </SafeAreaView>
+              
+
+            
+        )}
+        else {
+            return (
+                <ActivityIndicator></ActivityIndicator>
+            )
+        }
+        
     }
 
 }
 
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor:'black'
+    },
+    image: {
+        flex: 1,
+        height: hp('80%'),
+        resizeMode: 'contain'
+    },
+    text: {
+        color: 'white',
+        letterSpacing: 1.625,
+        paddingLeft: 10,
 
+        top: hp('10%'),
+        fontFamily: 'opensans-light',
+        fontSize: 60,
+    },
+    headerWrapper:
+    {
+        borderBottomWidth: 5,
+        borderBottomColor: '#64a19d',
+        paddingBottom: 10, width: wp('70%'),
+        alignSelf: "center"
+    },
+    headerText: {
+        fontFamily: 'opensans-bold',
+        fontSize: 35, color: 'white',
+        marginTop: 100,
+        textAlign: "center",
+        borderBottomColor: '#2cbab2',
+    },
+    infoWrapper:{
+        width:wp('90%'),
+        alignSelf:"center",
+        marginTop:20
+    },
+    infoText:{
+        color:'white',
+        fontFamily:'opensans-regular',
+        fontWeight:"bold",
+        fontSize:20
     },
     logo: {
 
@@ -85,54 +208,13 @@ const styles = StyleSheet.create({
         color:'#2cbab2'
 
     },
-    buttonText: {
-        textAlign: "center",
-        color: 'black',
-        opacity: 1,
-    }
-    ,
-    buttonContainer1: {
-        borderRadius: 5,
-        color:'#2cbab2',
-        paddingVertical: 10,
-        width: wp('65%'),
-        alignSelf: "center"
-    },
     buttonText1: {
-
-        fontSize: 15,
         textAlign: "center",
-        color: 'white'
+        opacity: 1,
+        fontFamily: 'opensans-bold',
+        fontSize: 18, color: 'white',
     },
-    inputtext: {
-        height: 40,
-        padding: 5,
-        fontSize: 20,
-        borderRadius: 5,
-        borderBottomWidth: 1,
-        borderBottomColor: 'black',
-        backgroundColor: 'transparent',
-        marginBottom: 20,
-        marginLeft: 60,
-        marginRight: 60,
 
-    },
-    modalToggle: {
-        flex: 1,
-        borderWidth: 1,
-        borderColor: '#f2f2f2',
-        padding: 10,
-        borderRadius: 10,
-        alignSelf: "center",
-        backgroundColor: "black",
-        opacity: 1
-    },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-
-
-    },
     innerContainer: {
         alignItems: 'center',
     },
@@ -141,12 +223,22 @@ const styles = StyleSheet.create({
 
     },
      buttonContainer1: {
-        backgroundColor: '#2980b9',
+        opacity:1,
         paddingVertical: 10,
-        top:400,
-        left:140,
+        bottom:10,
+        left:0,
         right:0,
-        width:100
-    },
+        width:100,
+        alignSelf:'center',
+        marginTop:40
+    },insideText: {
+         fontFamily: 'opensans-regular',
+         textAlign: "center",
+         color: 'white',
+         bottom: 20,
+         marginTop: 8,
+         fontSize: 15,
+         fontWeight: "bold"
+    }
 
 });

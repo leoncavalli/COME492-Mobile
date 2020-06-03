@@ -35,6 +35,24 @@ class LogoTitle extends React.Component {
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
+function HomeStackScreen(){
+    return(
+    <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{headerTitle: props => <LogoTitle {...props} />}} />
+    </Stack.Navigator>)
+}
+function TradeStackScreen(){
+    return(
+    <Stack.Navigator>
+        <Stack.Screen name="Trade Robot" component={TradeRobott} options={{headerTitle: props => <LogoTitle {...props} />}} />
+    </Stack.Navigator>)
+}
+function AboutStackScreen(){
+    return(
+    <Stack.Navigator>
+        <Stack.Screen name="About" component={About} options={{headerTitle: props => <LogoTitle {...props} />}} />
+    </Stack.Navigator>)
+}
 function ModelStackScreen() {
     return (
         <Stack.Navigator>
@@ -70,10 +88,10 @@ function MyTabs() {
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
             }}>
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={HomeStackScreen}/>
             <Tab.Screen name="Model" component={ModelStackScreen} />
-            <Tab.Screen name="Trade Robot" component={TradeRobott} />
-            <Tab.Screen name="About" component={About} />
+            <Tab.Screen name="Trade Robot" component={TradeStackScreen} />
+            <Tab.Screen name="About" component={AboutStackScreen} />
         </Tab.Navigator>
     );
 }
