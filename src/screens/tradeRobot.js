@@ -89,7 +89,7 @@ export default class welcome extends React.Component {
         if (assetsLoaded) {
             return (
                 <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                    <Swiper style={{ marginTop: 90 }} loop={false} >
+                    <Swiper style={{ marginTop: 30 }} loop={false} >
                         <View style={{ height: '70%' }} >
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
