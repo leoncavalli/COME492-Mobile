@@ -65,31 +65,41 @@ function ModelStackScreen() {
 }
 function MyTabs() {
     return (
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
+        <Tab.Navigator  
+            shifting={false}
+            activeColor={'white'}
+            barStyle={{backgroundColor:'#64a19d'}}
+            
 
+            screenOptions={({ route }) => ({
+                
+                tabBarIcon: ({focused}) => {
+                    let iconName;
+                    let color;
                     if (route.name === 'Home') {
-                        iconName = 'home'
-                    } else if (route.name === 'Model') {
-                        iconName = focused ? 'list' : 'list';
+                        color= focused ? 'black' :'white';
+                        iconName = 'home';
+                    } else if (route.name === 'Models') {
+                        color= focused ? 'black' :'white';
+
+                        iconName ='chart-bar';
                     }
                     else if(route.name==="Trade Robot"){
+                        color= focused ? 'black' :'white';
+
                         iconName='bolt'
                     }
                     else{
+                        color= focused ? 'black' :'white';
+
                         iconName='user'
                     }
-                    return <FontAwesome5 name={iconName} size={20} color={'#fff'} />;
+                    return <FontAwesome5 name={iconName} size={22} color={color} />;
                 },
             })}
-            tabBarOptions={{
-                activeTintColor: 'tomato',
-                inactiveTintColor: 'gray',
-            }}>
-            <Tab.Screen name="Home" component={HomeStackScreen}/>
-            <Tab.Screen name="Model" component={ModelStackScreen} />
+            >
+            <Tab.Screen name="Home" component={HomeStackScreen} />
+            <Tab.Screen name="Models" component={ModelStackScreen} />
             <Tab.Screen name="Trade Robot" component={TradeStackScreen} />
             <Tab.Screen name="About" component={AboutStackScreen} />
         </Tab.Navigator>

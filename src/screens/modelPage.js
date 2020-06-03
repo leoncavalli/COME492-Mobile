@@ -7,7 +7,7 @@ import { Card, Button } from 'react-native-elements'
 import * as Font from 'expo-font';
 import Swiper from 'react-native-swiper'
 import { LinearGradient } from 'expo-linear-gradient';
-
+import imagecard from '../img/ext.jpg'
 const firebaseConfig = {
     apiKey: "AIzaSyCNZpZqclLipXzpQVELS-Q4BM3HSSxC6zQ",
     authDomain: "myproject-d36ff.firebaseapp.com",
@@ -53,7 +53,7 @@ export default class welcome extends React.Component {
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
                                     ARIMA</Text></View>
-                            <Card image={require('../img/ext.jpg')} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
+                            <Card image={imagecard} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
                                 <Text style={styles.insideText}>
                                     ARIMA stands for ‘Auto Regressive Integrated Moving Average’ is used to forecast future values.
                                     </Text>
@@ -71,7 +71,7 @@ export default class welcome extends React.Component {
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
                                     LSTM</Text></View>
-                            <Card image={require('../img/ext.jpg')} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
+                            <Card image={imagecard} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
                                 <Text style={styles.insideText}>
                                     Long short-term memory (LSTM) is an artificial RNN architecture used to forecast future values.</Text>
                                 <TouchableOpacity style={styles.buttonContainer}>
