@@ -11,6 +11,8 @@ import Trader from '../screens/trader'
 import ArimaModel from '../screens/arimaModel'
 import ArimaResult from '../screens/arimaResult'
 import TradeRobott from '../screens/tradeRobot'
+import LstmModel from '../screens/lstmModel'
+import LstmResult from '../screens/lstmResult'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
 import * as React from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
@@ -59,6 +61,8 @@ function ModelStackScreen() {
             <Stack.Screen name="ModelPage" component={Model} options={{headerTitle: props => <LogoTitle {...props} />}} />
             <Stack.Screen name="ArimaModel" component={ArimaModel} options={{headerTitle: props => <LogoTitle {...props} />}} />
             <Stack.Screen name="ArimaResult" component={ArimaResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="LstmModel" component={LstmModel} options={{headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="LstmResult" component={LstmResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
             
         </Stack.Navigator>
     )

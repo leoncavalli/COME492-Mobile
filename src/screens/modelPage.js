@@ -82,7 +82,7 @@ export default class welcome extends React.Component {
                                             colors: ['#2cbab2', '#64a19d'],
                                             start: { x: 0, y: 0.5 },
                                             end: { x: 1, y: 0.5 },
-                                        }} title="Select Model" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+                                        }} title="Select Model" onPress={() => this.props.navigation.navigate('LstmModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
                                 </TouchableOpacity>
                             </Card>
                         </View>
