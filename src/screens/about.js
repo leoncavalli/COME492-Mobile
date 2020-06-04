@@ -56,7 +56,7 @@ export default class about extends React.Component {
         if(assetsLoaded){return (
 
             <SafeAreaView style={styles.container}>
-                    <ScrollView  loop={false}>
+                    <ScrollView >
                         
                         <LinearGradient style={{ height: 'auto' }} colors={[' rgba(11, 11, 11,1)', 'rgba(22, 22, 22, 0.9)', 'rgba(22, 22, 22, 0.8)']} locations={[0.10, 0.75, 1]}>
                             <View style={styles.headerWrapper}>

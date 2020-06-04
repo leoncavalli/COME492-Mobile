@@ -14,7 +14,7 @@ const customData = require('../shared/bist100.json');
 export default class welcome extends React.Component {
     constructor(props) {
         super(props)
-        var currentdate = new Date().getDate()
+        var currentdate = new Date()
 
         this.state = {
             dateStart: currentdate,
@@ -23,14 +23,14 @@ export default class welcome extends React.Component {
             minimumValue: 5000,
             maximumValue: 100000,
             selectedItems: [],
-           
+
 
         }
     }
     state = {
         assetsLoaded: false,
     };
-    
+
 
 
     async componentDidMount() {
@@ -39,6 +39,7 @@ export default class welcome extends React.Component {
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
             'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
             'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+            'montserrat-light':require('../../assets/fonts/Montserrat-Light.ttf')
 
 
         });
@@ -84,148 +85,148 @@ export default class welcome extends React.Component {
     render() {
         const { assetsLoaded } = this.state;
         const { selectedItems } = this.state;
-        const {heightView} = this.state
-        const {showheight}=this.state
+        const { heightView } = this.state
+        const { showheight } = this.state
         if (assetsLoaded) {
             return (
                 <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                    <Swiper style={{ marginTop: 30 }} loop={false} >
-                        <View style={{ height: '70%' }} >
+                    <Swiper loop={false} >
+                        <View>
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
-                                    TRADE</Text></View>
-                            <Card height={hp('50%')} >
+                                    STOCKS</Text>
+                            </View>
+                            <Card height={hp('60%')} >
+                            <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
+
+                                <View >
                                 <MultiSelect
                                     hideTags
+                                    styleMainWrapper={{height:'35%',top:'15%'}}
                                     ref={(component) => { this.multiSelect = component }}
                                     items={customData}
                                     uniqueKey="Symbol"
                                     onSelectedItemsChange={(selectedItems) => { this.setState({ selectedItems }) }}
                                     selectedItems={selectedItems}
+                                    fontSize={24}
+
                                     selectText="  Pick Items"
                                     searchInputPlaceholderText="Search Items..."
                                     onChangeInput={(text) => console.log(text)}
                                     tagRemoveIconColor="black"
                                     tagBorderColor="black"
                                     tagTextColor="black"
-                                    fontSize='18'
+                                    fontFamily='opensans-regular'
                                     selectedItemTextColor="black"
-                                    selectedItemIconColor="black"
+                                    selectedItemIconColor="#2cbab2"
                                     itemTextColor="black"
+                                    itemFontFamily='opensans-light'
                                     displayKey="Name"
-                                    searchInputStyle={{ color: '"black"' }}
-                                    submitButtonColor="#CCC"
-                                    submitButtonText="Submit"
-                                    styleDropdownMenu={{
-                                        width: wp('75%'),
-                                        marginLeft: wp('5%'),
-                                        marginTop: wp('5%'),
-
-                                    }}
-                                    searchInputStyle={{
-                                        height: 50
-                                    }}
-
-                                    styleDropdownMenuSubsection={
-                                        {
-
-                                        }
-                                    }
-                                    styleListContainer={{
-                                        height: hp('30%')
-                                    }}
-                                />
-                                <View  style={{ height:hp('30%') }}><ScrollView>
-                                    {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedItems)}
-                                </ScrollView></View>
+                                    searchInputStyle={{ color:"black", padding:15
+                                     }}
                                 
-
+                                   
+                                    
+                                    styleDropdownMenu={{
+                                        zIndex:15,
+                                        height:'100%'
+                                    }}
+                                    submitButtonColor="#2cbab2"
+                                    submitButtonText="Submit"
+                                />
+                               </View>
+                            
                             </Card>
                         </View>
-                        <View style={{ height: '70%' }}  >
+                        <View   >
                             <View >
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
-                                    TRADE</Text></View>
-                            <Card height={hp('30%')} marginTop={80} >
-                                <Image source={require('../img/fieldset3.png')} style={{ position: 'absolute', width: 100, height: 110, right: 0, top: 30 }} />
-                                <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 30, textAlign: "left", paddingTop: 1, color: 'black' }}>
-                                    DATES</Text>
-                                <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1, fontSize: 13, textAlign: "left", bottom: 7, top: 10, left: 75, color: 'black' }}>
-                                    Start Date</Text>
-                                <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1, fontSize: 13, textAlign: "left", bottom: 7, top: 52, left: 75, color: 'black' }}>
-                                    End Date</Text>
-                                <DatePicker
-                                    style={{ width: wp('55%'), height: hp('7%'), position: 'absolute', top: 70, right: 115 }}
-                                    date={this.state.dateStart}
-                                    mode="date"
-                                    format="DD/MM/YYYY"
-                                    minDate="01/05/2000"
-                                    maxDate={this.state.currentdate}
-                                    confirmBtnText="Confirm"
-                                    cancelBtnText="Cancel"
+                                    DATES</Text></View>
+                            <Card height={hp('60%')}  >
+                                <Image source={require('../img/trader1.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
+                                <View>
+                                    <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1,alignSelf:"center",fontSize: 15, textAlign: "left",marginTop:15, color: 'black' }}>
+                                        Start Date</Text>
+                                    <DatePicker
+                                        style={{ width: '80%',marginTop:5,alignSelf:"center"}}
+                                        date={this.state.dateStart}
+                                        mode="date"
+                                        format="DD/MM/YYYY"
+                                        minDate="01/05/2000"
+                                        maxDate={this.state.currentdate}
+                                        confirmBtnText="Confirm"
+                                        cancelBtnText="Cancel"
 
-                                    customStyles={{
-                                        dateIcon: {
-                                            position: 'absolute',
-                                            left: 0,
-                                            top: 4,
-                                            marginLeft: 2
-                                        },
-                                        dateInput: {
-                                            marginLeft: 40
-                                        },
-                                        placeholderText: {
-                                            color: "black"
-                                        },
-                                        dateText: {
-                                            color: "black",
-                                            fontSize: 15
-                                        }
+                                        customStyles={{
+                                            dateIcon: {
+                                                position: 'absolute',
+                                                left: 6,
+                                                top: 4,
+                                                
+                                            },
+                                            dateInput: {
+                                                borderRadius:10,
+                                            },
+                                            placeholderText: {
+                                                color: "black"
+                                            },
+                                            dateText: {
+                                                fontFamily:'opensans-light',
+                                                color: "black",
+                                                fontSize: 18
+                                            }
 
-                                    }}
-                                    onDateChange={(date) => { this.setState({ dateStart: date }) }} />
-                                <DatePicker
-                                    style={{ width: wp('55%'), height: hp('7%'), position: 'absolute', top: 130, right: 115 }}
-                                    date={this.state.dateEnd}
-                                    mode="date"
-                                    format="DD/MM/YYYY"
-                                    minDate="01/05/2000"
-                                    maxDate={this.state.currentdate}
-                                    confirmBtnText="Confirm"
-                                    cancelBtnText="Cancel"
+                                        }}
+                                        onDateChange={(date) => { this.setState({ dateStart: date }) }} />
+                                          <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1, alignSelf:"center",fontSize: 15,marginTop:15, textAlign: "left", color: 'black' }}>
+                                        End Date</Text>
+                                    <DatePicker
+                                        style={{ width: '80%',alignSelf:"center"}}
+                                        date={this.state.dateEnd}
+                                        mode="date"
+                                        format="DD/MM/YYYY"
+                                        minDate="01/05/2000"
+                                        maxDate={this.state.currentdate}
+                                        confirmBtnText="Confirm"
+                                        cancelBtnText="Cancel"
 
-                                    customStyles={{
-                                        dateIcon: {
-                                            position: 'absolute',
-                                            left: 0,
-                                            top: 4,
-                                            marginLeft: 2
-                                        },
-                                        dateInput: {
-                                            marginLeft: 40
-                                        },
-                                        placeholderText: {
-                                            color: "black"
-                                        },
-                                        dateText: {
-                                            color: "black",
-                                            fontSize: 15
-                                        }
+                                        customStyles={{
+                                            dateIcon: {
+                                                position: 'absolute',
+                                                left: 6,
+                                                top: 4,
+                                                
+                                            },
+                                            dateInput: {
+                                                borderRadius:10,
+                                                
+                                
+                                            },
+                                            placeholderText: {
+                                                color: "black"
+                                            },
+                                            dateText: {
+                                                fontFamily:'opensans-light',
+                                                color: "black",
+                                                fontSize: 18
+                                            }
 
-                                    }}
-                                    onDateChange={(date) => { this.setState({ dateEnd: date }) }}
-                                />
-
+                                        }}
+                                        onDateChange={(date) => { this.setState({ dateEnd: date }) }}
+                                    />
+                                </View>
                             </Card>
                         </View>
-                        <View style={{ height: '70%' }} >
+                        <View  >
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
-                                    TRADE</Text></View>
-                            <Card height={hp('50%')} >
-                                <Slider
-                                    style={{ width: wp('75%'), height: hp('5%'), position: "absolute", left: 10, right: 50, top: 50 }}
-                                    step={1}
+                                    BUDGET</Text></View>
+                            <Card height={hp('60%')} >
+                            <Image source={require('../img/trader2.png')} style={{ width: '80%', height: '50%', alignSelf: "center" }} />
+
+                                <Slider 
+                                    style={{ width:'100%',marginTop:'10%'}}
+                                    step={5000}
                                     maximumValue={this.state.maximumValue}
                                     minimumValue={this.state.minimumValue}
                                     value={this.state.minimumValue}
@@ -238,12 +239,14 @@ export default class welcome extends React.Component {
                                 />
 
                                 <Text style={{
-                                    textAlign: "center", position: "absolute", top: 150, left: 60,
-                                    right: 60, color: "black", fontSize: 20, fontWeight: "bold"
-                                }}>Specified budget : {this.state.budget} $</Text>
-                                <TouchableOpacity style={styles.buttonContainer1}>
-                                    <Text style={styles.buttonText1} >Simulate!</Text>
-                                </TouchableOpacity>
+                                    textAlign: "center",fontFamily:'opensans-light' ,fontSize:25
+                                }}>${this.state.budget} </Text>
+                                <Button style={{marginTop:25,paddingVertical:10}} ViewComponent={LinearGradient}
+                                        linearGradientProps={{
+                                            colors: ['#2cbab2', '#64a19d'],
+                                            start: { x: 0, y: 0.5 },
+                                            end: { x: 1, y: 0.5 },
+                                        }} title="SIMULATE" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
 
 
                             </Card>
