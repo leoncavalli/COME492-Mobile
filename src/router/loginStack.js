@@ -59,10 +59,10 @@ function ModelStackScreen() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="ModelPage" component={Model} options={{headerTitle: props => <LogoTitle {...props} />}} />
-            <Stack.Screen name="ArimaModel" component={ArimaModel} options={{headerTitle: props => <LogoTitle {...props} />}} />
-            <Stack.Screen name="ArimaResult" component={ArimaResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
-            <Stack.Screen name="LstmModel" component={LstmModel} options={{headerTitle: props => <LogoTitle {...props} />}} />
-            <Stack.Screen name="LstmResult" component={LstmResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="ArimaModel" component={ArimaModel} options={{headerBackTitleVisible:false,headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="ArimaResult" component={ArimaResult} options={{headerBackTitleVisible:false,headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="LstmModel" component={LstmModel} options={{headerBackTitleVisible:false,headerTitle: props => <LogoTitle {...props} />}} />
+            <Stack.Screen name="LstmResult" component={LstmResult} options={{headerBackTitleVisible:false,headerTitle: props => <LogoTitle {...props} />}} />
             
         </Stack.Navigator>
     )

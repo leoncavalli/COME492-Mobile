@@ -29,7 +29,8 @@ export default class arimaModel extends React.Component {
             periodType: '',
             selectedItems: [],
             data:[],
-            array:[]
+            array:[],
+            layout:[]
         })
     }
     state = {
@@ -40,7 +41,7 @@ export default class arimaModel extends React.Component {
     postData = async () => {
 
 
-        fetch('http://192.168.1.35:8000/simpleapi/', {
+        fetch('http://192.168.2.229:8000/simpleapi/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -60,12 +61,13 @@ export default class arimaModel extends React.Component {
         }).then((response) => response.json())
             .then((responseJson) => {
                
-                    this.setState({ array: responseJson.data })
+                    this.setState({ array: responseJson.data }),
+                    this.setState({layout:responseJson.layout})
              
 
             }).then(()=>{
             
-                this.props.navigation.navigate('ArimaResult',{data: this.state.array})
+                this.props.navigation.navigate('ArimaResult',{data: this.state.array,layout:this.state.layout})
                 
             })
             .catch((error) => {

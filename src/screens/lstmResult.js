@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, 
 import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import Card from '../shared/modelCard'
-import DatePicker from 'react-native-datepicker'
+import { Card, Button } from 'react-native-elements'
 import ModalDropdown from 'react-native-modal-dropdown'
 import * as firebase from 'firebase'
 import { LineChart } from 'react-native-chart-kit'
 import Plotly from 'react-native-plotly'
 import * as ScreenOrientation from 'expo-screen-orientation'
-import { Card } from 'react-native-elements'
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 
@@ -33,7 +33,7 @@ const upData = {
     type: 'scatter'
 };
 
-export default class arimaModel extends React.Component {
+export default class lstmResult extends React.Component {
     constructor(props) {
         super(props)
         var currentdate = new Date().getDate()
@@ -57,11 +57,21 @@ export default class arimaModel extends React.Component {
             <View style={styles.container}>
                 <Plotly
                 data={this.props.route.params.data}
+                layout={this.props.route.params.layout}
                 onLoad={() => console.log('loaded')}
                 debug
                 enableFullPlotly
                  />
-            </View>)
+                 <Button style={{marginBottom:20,width:wp('50%'),alignSelf:"center"}} ViewComponent={LinearGradient} // Don't forget this!
+            linearGradientProps={{
+                colors: ['#FFC107', '#FFC107'],
+                start: { x: 0, y: 0.5 },
+                end: { x: 1, y: 0.5 },
+            }} title="Try Another" onPress={() => this.props.navigation.navigate('ModelPage')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+            </View>
+            
+            
+            )
     }
 
 }
@@ -71,7 +81,8 @@ export default class arimaModel extends React.Component {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 1.25,
+        flex: 1,
+        backgroundColor:'white'
     },
     Header: {
         marginTop: 20,
