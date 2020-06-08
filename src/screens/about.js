@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator, Slider } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ScrollView, SafeAreaView, ImageBackground, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';

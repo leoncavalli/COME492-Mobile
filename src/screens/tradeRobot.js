@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ScrollView, ImageBackground, ActivityIndicator, TouchableWithoutFeedback, Keyboard, Slider } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ScrollView, ImageBackground, ActivityIndicator, Slider } from 'react-native';
+
 import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as firebase from 'firebase'
@@ -39,7 +40,7 @@ export default class welcome extends React.Component {
             'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
             'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
             'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
-            'montserrat-light':require('../../assets/fonts/Montserrat-Light.ttf')
+            'montserrat-light': require('../../assets/fonts/Montserrat-Light.ttf')
 
 
         });
@@ -97,45 +98,47 @@ export default class welcome extends React.Component {
                                     STOCKS</Text>
                             </View>
                             <Card height={hp('60%')} >
-                            <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
+                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
 
                                 <View >
-                                <MultiSelect
-                                    hideTags
-                                    styleMainWrapper={{height:'35%',top:'15%'}}
-                                    ref={(component) => { this.multiSelect = component }}
-                                    items={customData}
-                                    uniqueKey="Symbol"
-                                    onSelectedItemsChange={(selectedItems) => { this.setState({ selectedItems }) }}
-                                    selectedItems={selectedItems}
-                                    fontSize={24}
-
-                                    selectText="  Pick Items"
-                                    searchInputPlaceholderText="Search Items..."
-                                    onChangeInput={(text) => console.log(text)}
-                                    tagRemoveIconColor="black"
-                                    tagBorderColor="black"
-                                    tagTextColor="black"
-                                    fontFamily='opensans-regular'
-                                    selectedItemTextColor="black"
-                                    selectedItemIconColor="#2cbab2"
-                                    itemTextColor="black"
-                                    itemFontFamily='opensans-light'
-                                    displayKey="Name"
-                                    searchInputStyle={{ color:"black", padding:15
-                                     }}
-                                
                                    
-                                    
-                                    styleDropdownMenu={{
-                                        zIndex:15,
-                                        height:'100%'
-                                    }}
-                                    submitButtonColor="#2cbab2"
-                                    submitButtonText="Submit"
-                                />
-                               </View>
-                            
+                                    <MultiSelect
+                                        hideTags
+                                        styleMainWrapper={{ height: '35%', top: '15%' }}
+                                        ref={(component) => { this.multiSelect = component }}
+                                        items={customData}
+                                        uniqueKey="Symbol"
+                                        onSelectedItemsChange={(selectedItems) => { this.setState({ selectedItems }) }}
+                                        selectedItems={selectedItems}
+                                        fontSize={24}
+
+                                        selectText="  Pick Items"
+                                        searchInputPlaceholderText="Search Items..."
+                                        onChangeInput={(text) => console.log(text)}
+                                        tagRemoveIconColor="black"
+                                        tagBorderColor="black"
+                                        tagTextColor="black"
+                                        fontFamily='opensans-regular'
+                                        selectedItemTextColor="black"
+                                        selectedItemIconColor="#2cbab2"
+                                        itemTextColor="black"
+                                        itemFontFamily='opensans-light'
+                                        displayKey="Name"
+                                        searchInputStyle={{
+                                            color: "black", padding: 15
+                                        }}
+
+
+
+                                        styleDropdownMenu={{
+                                            zIndex: 15,
+                                            height: '100%'
+                                        }}
+                                        submitButtonColor="#2cbab2"
+                                        submitButtonText="Submit"
+                                    />
+                                </View>
+
                             </Card>
                         </View>
                         <View   >
@@ -145,10 +148,10 @@ export default class welcome extends React.Component {
                             <Card height={hp('60%')}  >
                                 <Image source={require('../img/trader1.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
                                 <View>
-                                    <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1,alignSelf:"center",fontSize: 15, textAlign: "left",marginTop:15, color: 'black' }}>
+                                    <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1, alignSelf: "center", fontSize: 15, textAlign: "left", marginTop: 15, color: 'black' }}>
                                         Start Date</Text>
                                     <DatePicker
-                                        style={{ width: '80%',marginTop:5,alignSelf:"center"}}
+                                        style={{ width: '80%', marginTop: 5, alignSelf: "center" }}
                                         date={this.state.dateStart}
                                         mode="date"
                                         format="DD/MM/YYYY"
@@ -162,26 +165,26 @@ export default class welcome extends React.Component {
                                                 position: 'absolute',
                                                 left: 6,
                                                 top: 4,
-                                                
+
                                             },
                                             dateInput: {
-                                                borderRadius:10,
+                                                borderRadius: 10,
                                             },
                                             placeholderText: {
                                                 color: "black"
                                             },
                                             dateText: {
-                                                fontFamily:'opensans-light',
+                                                fontFamily: 'opensans-light',
                                                 color: "black",
                                                 fontSize: 18
                                             }
 
                                         }}
                                         onDateChange={(date) => { this.setState({ dateStart: date }) }} />
-                                          <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1, alignSelf:"center",fontSize: 15,marginTop:15, textAlign: "left", color: 'black' }}>
+                                    <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 1, alignSelf: "center", fontSize: 15, marginTop: 15, textAlign: "left", color: 'black' }}>
                                         End Date</Text>
                                     <DatePicker
-                                        style={{ width: '80%',alignSelf:"center"}}
+                                        style={{ width: '80%', alignSelf: "center" }}
                                         date={this.state.dateEnd}
                                         mode="date"
                                         format="DD/MM/YYYY"
@@ -195,18 +198,18 @@ export default class welcome extends React.Component {
                                                 position: 'absolute',
                                                 left: 6,
                                                 top: 4,
-                                                
+
                                             },
                                             dateInput: {
-                                                borderRadius:10,
-                                                
-                                
+                                                borderRadius: 10,
+
+
                                             },
                                             placeholderText: {
                                                 color: "black"
                                             },
                                             dateText: {
-                                                fontFamily:'opensans-light',
+                                                fontFamily: 'opensans-light',
                                                 color: "black",
                                                 fontSize: 18
                                             }
@@ -222,10 +225,10 @@ export default class welcome extends React.Component {
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
                                     BUDGET</Text></View>
                             <Card height={hp('60%')} >
-                            <Image source={require('../img/trader2.png')} style={{ width: '80%', height: '50%', alignSelf: "center" }} />
+                                <Image source={require('../img/trader2.png')} style={{ width: '80%', height: '50%', alignSelf: "center" }} />
 
-                                <Slider 
-                                    style={{ width:'100%',marginTop:'10%'}}
+                                <Slider
+                                    style={{ width: '100%', marginTop: '10%' }}
                                     step={5000}
                                     maximumValue={this.state.maximumValue}
                                     minimumValue={this.state.minimumValue}
@@ -239,14 +242,14 @@ export default class welcome extends React.Component {
                                 />
 
                                 <Text style={{
-                                    textAlign: "center",fontFamily:'opensans-light' ,fontSize:25
+                                    textAlign: "center", fontFamily: 'opensans-light', fontSize: 25
                                 }}>${this.state.budget} </Text>
-                                <Button style={{marginTop:25,paddingVertical:10}} ViewComponent={LinearGradient}
-                                        linearGradientProps={{
-                                            colors: ['#2cbab2', '#64a19d'],
-                                            start: { x: 0, y: 0.5 },
-                                            end: { x: 1, y: 0.5 },
-                                        }} title="SIMULATE" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+                                <Button style={{ marginTop: 25, paddingVertical: 10 }} ViewComponent={LinearGradient}
+                                    linearGradientProps={{
+                                        colors: ['#2cbab2', '#64a19d'],
+                                        start: { x: 0, y: 0.5 },
+                                        end: { x: 1, y: 0.5 },
+                                    }} title="SIMULATE" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
 
 
                             </Card>
