@@ -49,7 +49,7 @@ export default class welcome extends React.Component {
     postData = async () => {
 
 
-        fetch('http://192.168.1.35:8000/simpleapi/', {
+        fetch('http://192.168.1.35:8000/simpleapi3/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -70,13 +70,12 @@ export default class welcome extends React.Component {
         }).then((response) => response.json())
         .then((responseJson) => {
 
-            this.setState({ array: responseJson.data }),
-                this.setState({ layout: responseJson.layout })
+            this.setState({ array: responseJson.data })
 
 
         }).then(() => {
 
-            this.props.navigation.navigate('TradeResult', { data: this.state.array, layout: this.state.layout })
+            this.props.navigation.navigate('TradeResult', { data: this.state.array })
 
         })
         .catch((error) => {
