@@ -24,7 +24,7 @@ export default class welcome extends React.Component {
             minimumValue: 5000,
             maximumValue: 100000,
             selectedItems: [],
-
+            array:[],
 
         }
     }
@@ -57,7 +57,10 @@ export default class welcome extends React.Component {
             },
             body: JSON.stringify({
 
-                'selectedItems': this.state.selectedItems,
+                "selectedItems": this.state.selectedItems,
+                "startDate": this.state.dateStart,
+                "endDate": this.state.dateEnd,
+                "budget":this.state.budget
 
 
             }
@@ -65,21 +68,24 @@ export default class welcome extends React.Component {
 
             )
         }).then((response) => response.json())
-            .then((responseJson) => {
-                if (this.state.selectedItems != 0) {
-                    this.setState({ text: responseJson.selectedItems })
-                }
-                else {
-                    alert("Please select all informations")
-                    return
-                }
+        .then((responseJson) => {
 
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            ;
+            this.setState({ array: responseJson.data }),
+                this.setState({ layout: responseJson.layout })
 
+
+        }).then(() => {
+
+            this.props.navigation.navigate('TradeResult', { data: this.state.array, layout: this.state.layout })
+
+        })
+        .catch((error) => {
+            if (this.state.dateStart == 0 || this.state.dateEnd == 0 || this.state.selectedItems == 0 || this.state.budget == 0) {
+                alert("Please select all informations")
+                return
+            }
+        })
+        ;
 
 
     }
@@ -110,7 +116,8 @@ export default class welcome extends React.Component {
                                         multipleText="%d items have been selected."
                                         min={0}
                                         max={10}
-                                        defaultValue={this.state.country}
+                                        defaultValue={null}
+                                        placeholder='Select a stock market'
                                         containerStyle={{ height: 50, marginTop: hp('10%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}

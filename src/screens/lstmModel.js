@@ -118,8 +118,8 @@ export default class arimaModel extends React.Component {
                                         items={customData.map((s) => (
                                             { label: s.Name, value: s.Symbol }
                                         ))}
-
-                                        defaultValue={this.state.country}
+                                        defaultValue={null}
+                                        placeholder='Select a stock market'
                                         containerStyle={{ height: 50, marginTop: hp('1%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}
@@ -229,8 +229,8 @@ export default class arimaModel extends React.Component {
                                         items={[{label:'Daily',value:'Daily'},
                                                 {label:'Weekly',value:'Weekly'},
                                                 {label:'Monthly',value:'Monthly'}]}
-
-                                        defaultValue={this.state.country}
+                                        defaultValue={null}
+                                        placeholder='Select a period'
                                         containerStyle={{ height: 50, marginTop: hp('1%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}
