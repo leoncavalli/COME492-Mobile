@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ScrollView, ImageBackground, ActivityIndicator, Slider } from 'react-native';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as firebase from 'firebase'
@@ -98,46 +98,30 @@ export default class welcome extends React.Component {
                                     STOCKS</Text>
                             </View>
                             <Card height={hp('60%')} >
-                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
+                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '40%', alignSelf: "center" }} />
 
-                                <View >
-                                   
-                                    <MultiSelect
-                                        hideTags
-                                        styleMainWrapper={{ height: '35%', top: '15%' }}
-                                        ref={(component) => { this.multiSelect = component }}
-                                        items={customData}
-                                        uniqueKey="Symbol"
-                                        onSelectedItemsChange={(selectedItems) => { this.setState({ selectedItems }) }}
-                                        selectedItems={selectedItems}
-                                        fontSize={24}
+                                
+                                <DropDownPicker
+                                        items={customData.map((s) => (
+                                            { label: s.Name, value: s.Symbol }
+                                        ))}
+                                      
+                                        multiple={true}
+                                        multipleText="%d items have been selected."
+                                        min={0}
+                                        max={10}
+                                        defaultValue={this.state.country}
+                                        containerStyle={{ height: 50, marginTop: hp('10%') }}
+                                        style={{ backgroundColor: '#fafafa' }}
+                                        labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}
 
-                                        selectText="  Pick Items"
-                                        searchInputPlaceholderText="Search Items..."
-                                        onChangeInput={(text) => console.log(text)}
-                                        tagRemoveIconColor="black"
-                                        tagBorderColor="black"
-                                        tagTextColor="black"
-                                        fontFamily='opensans-regular'
-                                        selectedItemTextColor="black"
-                                        selectedItemIconColor="#2cbab2"
-                                        itemTextColor="black"
-                                        itemFontFamily='opensans-light'
-                                        displayKey="Name"
-                                        searchInputStyle={{
-                                            color: "black", padding: 15
-                                        }}
-
-
-
-                                        styleDropdownMenu={{
-                                            zIndex: 15,
-                                            height: '100%'
-                                        }}
-                                        submitButtonColor="#2cbab2"
-                                        submitButtonText="Submit"
+                                        dropDownStyle={{ borderColor: '#2cbab2', backgroundColor: '#fafafa', paddingHorizontal: 0, paddingVertical: 0 }}
+                                        onChangeItem={item => this.setState({
+                                            selectedItems: item.value
+                                        })}
+                                        activeItemStyle={{ backgroundColor: 'rgba(44, 186, 178,0.5)' }}
                                     />
-                                </View>
+                                
 
                             </Card>
                         </View>

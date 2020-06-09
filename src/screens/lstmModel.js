@@ -54,7 +54,7 @@ export default class arimaModel extends React.Component {
     postData = async () => {
 
 
-        fetch('http://192.168.2.229:8000/simpleapi2/', {
+        fetch('http://192.168.1.35:8000/simpleapi2/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -223,7 +223,7 @@ export default class arimaModel extends React.Component {
                                     PERIOD</Text></View>
                             <Card height={hp('60%')} >
                                 <Image source={require('../img/trader2.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
-                                <View style={{ height: '30%' }} >
+                                <View style={{ height: '30%' , zIndex:100}} >
 
                                     <DropDownPicker
                                         items={[{label:'Daily',value:'Daily'},
@@ -237,7 +237,7 @@ export default class arimaModel extends React.Component {
 
                                         dropDownStyle={{ borderColor: '#2cbab2', backgroundColor: '#fafafa', paddingHorizontal: 0, paddingVertical: 0 }}
                                         onChangeItem={item => this.setState({
-                                            indexPeriod: item.value
+                                            periodType: item.value
                                         })}
                                         activeItemStyle={{ backgroundColor: 'rgba(44, 186, 178,0.5)' }}
                                     />
@@ -252,7 +252,7 @@ export default class arimaModel extends React.Component {
                                         colors: ['#2cbab2', '#64a19d'],
                                         start: { x: 0, y: 0.5 },
                                         end: { x: 1, y: 0.5 },
-                                    }} title="GO!" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+                                    }} title="GO!" onPress={this.postData} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
 
 
                             </Card>
