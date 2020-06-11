@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ImageBackground, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ScrollView, ImageBackground, Dimensions, ActivityIndicator } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import Card from '../shared/modelCard'
@@ -50,8 +50,9 @@ export default class tradeResult extends React.Component {
     }
 
     render() {
-        const finalBudget = this.props.route.params.finalData.budget;
-        const cash = this.props.route.params.finalData.cash;
+        const initialBudget = this.props.route.params.initBudget;
+        let finalBudget = this.props.route.params.finalData.budget;
+        let cash = this.props.route.params.finalData.cash;
         const finalPortfolio_ = this.props.route.params.finalData.portfolio;
         const latests_ = this.props.route.params.finalData.latests;
         const chartConfig = {
@@ -64,6 +65,28 @@ export default class tradeResult extends React.Component {
             barPercentage: 0.5,
             useShadowColorFromDataset: false // optional
         };
+        Object.keys(finalPortfolio_).forEach(key => {
+            if (finalPortfolio_[key] === 0) {
+              delete finalPortfolio_[key];
+            }
+          });
+        finalBudget+=cash
+          let currentvalue=0
+          Object.keys(finalPortfolio_).forEach(key=>{
+              currentvalue+=latests_[key]*finalPortfolio_[key];
+          })
+          let currentValueStr = currentvalue.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+          );
+          let initialBudgetStr = initialBudget.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+          );
+          let finalBudgetStr = finalBudget.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+          );
         const data = [
             {
                 name: "Seoul",
@@ -102,6 +125,8 @@ export default class tradeResult extends React.Component {
         ];
 
         return (
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <ScrollView>
             <View style={styles.container}>
 
                 <PieChart
@@ -114,9 +139,32 @@ export default class tradeResult extends React.Component {
                     paddingLeft="15"
                     
                 />
+            <Card height={hp('15%')}>
+                        <View style={styles.headerWrapper}>
+                            <Text style={styles.headerText} >Initial Budget</Text>
+                        </View>
+                        <Text style={styles.cardText}>${initialBudgetStr}</Text>
+            </Card>
+            <Card height={hp('15%')}>
+                        <View style={styles.headerWrapper}>
+                            <Text style={styles.headerText} >Final Budget</Text>
+                        </View>
+                        <Text style={styles.cardText}>${finalBudgetStr}</Text>
+                        
+            </Card>
+            <Card height={hp('15%')}>
+                        <View style={styles.headerWrapper}>
+                            <Text style={styles.headerText} >Portfolio Value</Text>
+                        </View>
+                        <Text style={styles.cardText}>${currentValueStr}</Text>
+                        
+            </Card>
+            
+                
 
             </View>
-
+            </ScrollView>
+            </KeyboardAvoidingView>
 
         )
     }
@@ -175,11 +223,11 @@ const styles = StyleSheet.create({
         marginTop: 15,
 
     },
-    buttonText: {
+    cardText: {
         textAlign: "center",
-        color: 'white',
+        color: 'black',
         fontWeight: "bold",
-        opacity: 1,
+        marginTop:10
 
     },
     buttonContainer1: {
@@ -220,5 +268,19 @@ const styles = StyleSheet.create({
         marginLeft: 68,
         marginBottom: 3,
         fontSize: 12,
-    }
+    },
+    headerWrapper:
+    {
+        borderBottomWidth: 2,
+        borderBottomColor: 'black',
+        paddingBottom: 10, width: wp('70%'),
+        alignSelf: "center"
+    },
+    headerText: {
+        fontFamily: 'opensans-bold',
+        fontSize: 15, color: 'black',
+        
+        textAlign: "center",
+        borderBottomColor: 'black',
+    },
 });

@@ -56,7 +56,7 @@ export default class arimaModel extends React.Component {
     postData = async () => {
 
 
-        fetch('http://192.168.1.35:8000/simpleapi/', {
+        fetch('http://192.168.1.39:8000/simpleapi/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

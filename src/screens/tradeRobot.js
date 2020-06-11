@@ -20,12 +20,12 @@ export default class welcome extends React.Component {
         this.state = {
             dateStart: currentdate,
             dateEnd: currentdate,
-            budget: '0',
+            budget:0,
             minimumValue: 5000,
             maximumValue: 100000,
             selectedItems: [],
-            finalData:[]
-
+            finalData:[],
+            
         }
     }
     state = {
@@ -49,7 +49,7 @@ export default class welcome extends React.Component {
     postData = async () => {
 
 
-        fetch('http://192.168.2.229:8000/simpleapi3/', {
+        fetch('http://192.168.1.39:8000/simpleapi3/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -65,7 +65,7 @@ export default class welcome extends React.Component {
                 .then((responseJson) => {
                     this.setState({ finalData:responseJson})
                 }).then(()=>{
-                this.props.navigation.navigate('TradeResult', { finalData: this.state.finalData})
+                this.props.navigation.navigate('TradeResult', { finalData: this.state.finalData, initBudget:this.state.budget})
 
             })
             .catch((error) => {
