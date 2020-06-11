@@ -49,13 +49,13 @@ export default class welcome extends React.Component {
 
         if (assetsLoaded) {
             return (
-                <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                    <Swiper  >
-                        <View style={{ height: '70%' }}>
+                <View style={styles.container}>
+                   <Swiper style={{height:hp('60%')}}> 
+                        <View style={{ height: '80%' }}>
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
                                     ARIMA</Text></View>
-                            <Card image={imagecard} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
+                            <Card image={imagecard} imageStyle={{height:200,resizeMode:'cover'}}>
                                 <Text style={styles.insideText}>
                                     ARIMA stands for ‘Auto Regressive Integrated Moving Average’ is used to forecast future values.
                                     </Text>
@@ -73,7 +73,7 @@ export default class welcome extends React.Component {
                             <View>
                                 <Text style={{ fontFamily: 'opensans-bold', letterSpacing: 3, fontSize: 40, textAlign: "center", paddingTop: 15, color: 'white' }}>
                                     LSTM</Text></View>
-                            <Card image={imagecard2} imageProps={{ resizeMode: "cover" }} imageStyle={{ height: '50%' }}>
+                            <Card image={imagecard2}  imageStyle={{ height: 200,resizeMode:'cover' }}>
                                 <Text style={styles.insideText}>
                                     Long short-term memory (LSTM) is an artificial RNN architecture used to forecast future values.</Text>
                                 <TouchableOpacity style={styles.buttonContainer}>
@@ -101,7 +101,7 @@ export default class welcome extends React.Component {
                  </TouchableOpacity>
                  
             </View> */}
-                </KeyboardAvoidingView>
+            </View>
             )
         }
         else {

@@ -10,6 +10,7 @@ import About from '../screens/about'
 import ArimaModel from '../screens/arimaModel'
 import ArimaResult from '../screens/arimaResult'
 import TradeRobott from '../screens/tradeRobot'
+import TradeResult from '../screens/tradeResult'
 import LstmModel from '../screens/lstmModel'
 import LstmResult from '../screens/lstmResult'
 import { heightPercentageToDP } from 'react-native-responsive-screen'
@@ -46,6 +47,8 @@ function TradeStackScreen(){
     return(
     <Stack.Navigator>
         <Stack.Screen name="Trade Robot" component={TradeRobott} options={{headerTitle: props => <LogoTitle {...props} />}} />
+        <Stack.Screen name="TradeResult" component={TradeResult} options={{headerTitle: props => <LogoTitle {...props} />}} />
+
     </Stack.Navigator>)
 }
 function AboutStackScreen(){

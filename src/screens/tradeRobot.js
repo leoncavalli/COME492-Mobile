@@ -24,7 +24,7 @@ export default class welcome extends React.Component {
             minimumValue: 5000,
             maximumValue: 100000,
             selectedItems: [],
-
+            finalData:[]
 
         }
     }
@@ -49,7 +49,7 @@ export default class welcome extends React.Component {
     postData = async () => {
 
 
-        fetch('http://192.168.1.35:8000/simpleapi/', {
+        fetch('http://192.168.2.229:8000/simpleapi3/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -57,35 +57,24 @@ export default class welcome extends React.Component {
             },
             body: JSON.stringify({
 
-                'selectedItems': this.state.selectedItems,
-
-
+                "selectedItems": this.state.selectedItems,
+                "budget": this.state.budget
             }
-
-
             )
         }).then((response) => response.json())
-            .then((responseJson) => {
-                if (this.state.selectedItems != 0) {
-                    this.setState({ text: responseJson.selectedItems })
-                }
-                else {
-                    alert("Please select all informations")
-                    return
-                }
+                .then((responseJson) => {
+                    this.setState({ finalData:responseJson})
+                }).then(()=>{
+                this.props.navigation.navigate('TradeResult', { finalData: this.state.finalData})
 
             })
             .catch((error) => {
+               
                 console.error(error);
             })
-            ;
-
-
-
     }
     render() {
         const { assetsLoaded } = this.state;
-        const { selectedItems } = this.state;
         const { heightView } = this.state
         const { showheight } = this.state
         if (assetsLoaded) {
@@ -98,32 +87,38 @@ export default class welcome extends React.Component {
                                     STOCKS</Text>
                             </View>
                             <Card height={hp('60%')} >
-                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '40%', alignSelf: "center" }} />
+                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
 
-                                
-                                <DropDownPicker
+                                <View style={{ height: '50%' }} >
+
+                                    <DropDownPicker
                                         items={customData.map((s) => (
                                             { label: s.Name, value: s.Symbol }
                                         ))}
-                                      
+
                                         multiple={true}
-                                        multipleText="%d items have been selected."
+                                        multipleText="%d stocks have been selected."
                                         min={0}
                                         max={10}
+                                        searchable={true}
                                         defaultValue={this.state.country}
-                                        containerStyle={{ height: 50, marginTop: hp('10%') }}
+                                        containerStyle={{ height: 50, marginTop: hp('1%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}
 
-                                        dropDownStyle={{ borderColor: '#2cbab2', backgroundColor: '#fafafa', paddingHorizontal: 0, paddingVertical: 0 }}
+                                        dropDownStyle={{ borderColor: '#2cbab2', backgroundColor: '#fafafa', paddingHorizontal: 15, paddingVertical: 0 }}
                                         onChangeItem={item => this.setState({
-                                            selectedItems: item.value
+                                            selectedItems: item
                                         })}
-                                        activeItemStyle={{ backgroundColor: 'rgba(44, 186, 178,0.5)' }}
                                     />
-                                
+
+
+
+
+                                </View>
 
                             </Card>
+
                         </View>
                         <View   >
                             <View >
@@ -233,7 +228,7 @@ export default class welcome extends React.Component {
                                         colors: ['#2cbab2', '#64a19d'],
                                         start: { x: 0, y: 0.5 },
                                         end: { x: 1, y: 0.5 },
-                                    }} title="SIMULATE" onPress={() => this.props.navigation.navigate('ArimaModel')} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
+                                    }} title="SIMULATE" onPress={this.postData} titleStyle={{ fontFamily: 'opensans-bold' }}></Button>
 
 
                             </Card>
