@@ -4,19 +4,11 @@ import { StackNavigator } from 'react-navigation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import Card from '../shared/modelCard'
 import { Card, Button } from 'react-native-elements'
-import ModalDropdown from 'react-native-modal-dropdown'
 import * as firebase from 'firebase'
-import Plotly from 'react-native-plotly'
-import * as ScreenOrientation from 'expo-screen-orientation'
-import { LinearGradient } from 'expo-linear-gradient';
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-} from "react-native-chart-kit";
+import * as Font from 'expo-font';
+import ProgressCircle from 'react-native-progress-circle'
+
+import { PieChart } from "react-native-chart-kit";
 
 
 const firebaseConfig = {
@@ -33,6 +25,20 @@ if (!firebase.apps.length) {
 }
 
 export default class tradeResult extends React.Component {
+    state = {
+        assetsLoaded: false,
+    };
+    async componentDidMount() {
+        await Font.loadAsync({
+
+            'opensans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+            'opensans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'opensans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+
+
+        });
+        this.setState({ assetsLoaded: true });
+    }
     constructor(props) {
         super(props)
         var currentdate = new Date().getDate()
@@ -50,11 +56,43 @@ export default class tradeResult extends React.Component {
     }
 
     render() {
+        const { assetsLoaded } = this.state;
+
         const initialBudget = this.props.route.params.initBudget;
         let finalBudget = this.props.route.params.finalData.budget;
         let cash = this.props.route.params.finalData.cash;
         const finalPortfolio_ = this.props.route.params.finalData.portfolio;
+
         const latests_ = this.props.route.params.finalData.latests;
+
+        Object.keys(finalPortfolio_).forEach(key => {
+            if (finalPortfolio_[key] === 0) {
+                delete finalPortfolio_[key];
+            }
+        });
+        var stocks = Object.keys(finalPortfolio_);
+        var stockquantity = Object.values(finalPortfolio_);
+        finalBudget = finalBudget + cash
+        let profitpercentage = (finalBudget / initialBudget * 100) - 100;
+        profitpercentage =parseFloat(profitpercentage.toFixed(2));
+
+        let currentvalue = 0
+        Object.keys(finalPortfolio_).forEach(key => {
+            currentvalue += latests_[key] * finalPortfolio_[key];
+        })
+        let currentValueStr = currentvalue.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+        );
+        let initialBudgetStr = initialBudget.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+        );
+        let finalBudgetStr = finalBudget.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+        );
+        let colors=['#F4511E','#4CAF50','#1E88E5','#1E88E5','#1E88E5','#1E88E5']
         const chartConfig = {
             backgroundGradientFrom: "#1E2923",
             backgroundGradientFromOpacity: 0,
@@ -65,108 +103,139 @@ export default class tradeResult extends React.Component {
             barPercentage: 0.5,
             useShadowColorFromDataset: false // optional
         };
-        Object.keys(finalPortfolio_).forEach(key => {
-            if (finalPortfolio_[key] === 0) {
-              delete finalPortfolio_[key];
+        var data = [];
+        for (var i = 0; i < stocks.length; i++) {
+            data.push({ name: stocks[i], value: stockquantity[i], color:colors[i]});
+        }
+        
+        if (assetsLoaded) {
+            if (stocks.length > 0) {
+                return (
+
+                    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                        <ScrollView>
+                            <View style={styles.container}>
+                                <Card >
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Initial Budget</Text>
+                                    </View>
+                                    <Text style={styles.cardText}>${initialBudgetStr}</Text>
+                                </Card>
+                                <Card >
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Final Budget</Text>
+                                    </View>
+                                    <Text style={styles.cardText}>${finalBudgetStr}</Text>
+
+                                </Card>
+                                <Card >
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Portfolio Value</Text>
+                                    </View>
+                                    <Text style={styles.cardText}>${currentValueStr}</Text>
+
+                                </Card>
+                                <Card>
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Budget Profit</Text>
+                                    </View>
+                                    <ProgressCircle
+                                        percent={profitpercentage}
+                                        radius={100}
+                                        borderWidth={30}
+                                        outerCircleStyle={{ marginTop: 15,alignSelf:"center"}}
+
+                                        color="#2cbab2"
+                                        shadowColor="#999"
+                                        bgColor="#fff"
+                                    >
+                                        <Text style={{ fontSize: 18 }}>{profitpercentage+'%'}</Text>
+                                    </ProgressCircle>
+                                </Card>
+                                <Card>
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Portfolio</Text>
+                                    </View>
+                                    <PieChart
+                                        data={data}
+                                        width={wp('90%')}
+                                        height={220}
+                                        chartConfig={chartConfig}
+                                        accessor="value"
+                                        backgroundColor="transparent"
+                                        paddingLeft="15"
+                                        absolute
+                                    />
+                                </Card>
+
+
+                            </View>
+                        </ScrollView>
+                    </KeyboardAvoidingView>
+
+                )
+
+            } else {
+                return (
+
+                    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                        <ScrollView>
+                            <View style={styles.container}>
+
+
+                                <Card>
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Initial Budget</Text>
+                                    </View>
+                                    <Text style={styles.cardText}>${initialBudgetStr}</Text>
+                                </Card>
+                                <Card>
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Final Budget</Text>
+                                    </View>
+                                    <Text style={styles.cardText}>${finalBudgetStr}</Text>
+
+                                </Card>
+                                <Card>
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Portfolio Value</Text>
+                                    </View>
+                                    <Text style={styles.cardText}>${currentValueStr}</Text>
+
+                                </Card>
+                                <Card>
+                                    <View style={styles.headerWrapper}>
+                                        <Text style={styles.headerText} >Initial Budget</Text>
+                                    </View>
+                                    <ProgressCircle
+                                        percent={profitpercentage}
+                                        radius={100}
+                                        borderWidth={30}
+                                        outerCircleStyle={{ marginTop: 15, marginLeft: 50 }}
+
+                                        color="#3399FF"
+                                        shadowColor="#999"
+                                        bgColor="#fff"
+                                    >
+                                        <Text style={{ fontSize: 18 }}>{profitpercentage+'%'}</Text>
+                                    </ProgressCircle>
+                                </Card>
+                                <Card >
+                                    <Text style={styles.cardText}>No stocks left in portfolio.</Text>
+                                </Card>
+
+
+                            </View>
+                        </ScrollView>
+                    </KeyboardAvoidingView>
+
+                )
             }
-          });
-        finalBudget+=cash
-          let currentvalue=0
-          Object.keys(finalPortfolio_).forEach(key=>{
-              currentvalue+=latests_[key]*finalPortfolio_[key];
-          })
-          let currentValueStr = currentvalue.toLocaleString(
-            undefined,
-            { minimumFractionDigits: 2 }
-          );
-          let initialBudgetStr = initialBudget.toLocaleString(
-            undefined,
-            { minimumFractionDigits: 2 }
-          );
-          let finalBudgetStr = finalBudget.toLocaleString(
-            undefined,
-            { minimumFractionDigits: 2 }
-          );
-        const data = [
-            {
-                name: "Seoul",
-                population: 21500000,
-                legendFontColor: "#7F7F7F",
-                legendFontSize: 15
-            },
-            {
-                name: "Toronto",
-                population: 2800000,
-                color: "#F00",
-                legendFontColor: "#7F7F7F",
-                legendFontSize: 15
-            },
-            {
-                name: "Beijing",
-                population: 527612,
-                color: "red",
-                legendFontColor: "#7F7F7F",
-                legendFontSize: 15
-            },
-            {
-                name: "New York",
-                population: 8538000,
-                color: "#f0f0f0",
-                legendFontColor: "#7F7F7F",
-                legendFontSize: 15
-            },
-            {
-                name: "Moscow",
-                population: 11920000,
-                color: "rgb(0, 0, 255)",
-                legendFontColor: "#7F7F7F",
-                legendFontSize: 15
-            }
-        ];
+        }
+        else {
+            return (<ActivityIndicator></ActivityIndicator>)
+        }
 
-        return (
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <ScrollView>
-            <View style={styles.container}>
-
-                <PieChart
-                    data={data}
-                    width={350}
-                    height={220}
-                    chartConfig={chartConfig}
-                    accessor="population"
-                    backgroundColor="transparent"
-                    paddingLeft="15"
-                    
-                />
-            <Card height={hp('15%')}>
-                        <View style={styles.headerWrapper}>
-                            <Text style={styles.headerText} >Initial Budget</Text>
-                        </View>
-                        <Text style={styles.cardText}>${initialBudgetStr}</Text>
-            </Card>
-            <Card height={hp('15%')}>
-                        <View style={styles.headerWrapper}>
-                            <Text style={styles.headerText} >Final Budget</Text>
-                        </View>
-                        <Text style={styles.cardText}>${finalBudgetStr}</Text>
-                        
-            </Card>
-            <Card height={hp('15%')}>
-                        <View style={styles.headerWrapper}>
-                            <Text style={styles.headerText} >Portfolio Value</Text>
-                        </View>
-                        <Text style={styles.cardText}>${currentValueStr}</Text>
-                        
-            </Card>
-            
-                
-
-            </View>
-            </ScrollView>
-            </KeyboardAvoidingView>
-
-        )
     }
 
 }
@@ -177,7 +246,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#1D1B26'
     },
     Header: {
         marginTop: 20,
@@ -226,8 +295,9 @@ const styles = StyleSheet.create({
     cardText: {
         textAlign: "center",
         color: 'black',
-        fontWeight: "bold",
-        marginTop:10
+        fontSize: 25,
+        fontFamily: 'opensans-light',
+        paddingVertical: 10
 
     },
     buttonContainer1: {
@@ -267,19 +337,19 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 68,
         marginBottom: 3,
-        fontSize: 12,
+        fontSize: 15,
     },
     headerWrapper:
     {
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderBottomColor: 'black',
         paddingBottom: 10, width: wp('70%'),
         alignSelf: "center"
     },
     headerText: {
         fontFamily: 'opensans-bold',
-        fontSize: 15, color: 'black',
-        
+        fontSize: 25, color: 'black',
+
         textAlign: "center",
         borderBottomColor: 'black',
     },
