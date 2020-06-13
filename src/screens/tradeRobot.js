@@ -52,7 +52,7 @@ export default class welcome extends React.Component {
             isLoading: true
         })
 
-        fetch('http://192.168.2.229:8000/simpleapi3/', {
+        fetch('http://192.168.1.39:8000/simpleapi3/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -76,7 +76,7 @@ export default class welcome extends React.Component {
             })
             .catch((error) => {
 
-                if (this.state.selectedItems == 0 || this.state.budget == 0) {
+                if (this.state.selectedItems == 0 || this.state.budget == 0 || this.state.dateStart == this.state.currentdate || this.state.dateEnd == this.state.currentdate) {
                     alert("Please select all informations")
                     this.setState({ isLoading: false })
                     return
