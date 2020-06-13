@@ -70,7 +70,7 @@ export default class about extends React.Component {
                         <Swiper  >
                             <View>
                                 <Card >
-                                    <Image source={require('../img/arimaSelect.jpg')} style={{ height: '90%', width: '100%' , resizeMode:"contain" }} />
+                                    <Image source={require('../img/arimaSelect.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain",alignSelf:"center" }} />
                                     <Text style={styles.insideText}>
                                         After login in there are four tabs : Home , Model , Trade Robot and About. On model tab we can access our two models ARIMA and LSTM
                                     </Text>
@@ -81,7 +81,7 @@ export default class about extends React.Component {
                             </View>
                             <View  >
                                 <Card>
-                                <Image source={require('../img/lstmSelect.jpg')} style={{ height: '90%', width: '100%' , resizeMode:"contain" }} />
+                                <Image source={require('../img/lstmSelect.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain" ,alignSelf:"center"}} />
                                     <Text style={styles.insideText}>
                                         After login in there are four tabs : Home , Model , Trade Robot and About. On model tab we can access our two models ARIMA and LSTM
                                     </Text>
@@ -90,7 +90,7 @@ export default class about extends React.Component {
                             </View>
                             <View >
                                 <Card >
-                                <Image source={require('../img/stockMarket.jpg')} style={{ height: '86%', width: '100%' , resizeMode:"contain" }} />
+                                <Image source={require('../img/stockMarket.jpg')} style={{ height: '82%', width: '95%' , resizeMode:"contain" ,alignSelf:"center"}} />
                                     <Text style={styles.insideText}>
                                         On press select model , each model will require user to specify the same parameters and all parameters must be specified otherwise app will throw error. Stock name is required to get spesific stock market values
                                     </Text>
@@ -99,7 +99,7 @@ export default class about extends React.Component {
                             </View>
                             <View  >
                                 <Card >
-                                <Image source={require('../img/dates.jpg')} style={{ height: '90%', width: '100%' , resizeMode:"contain" }} />
+                                <Image source={require('../img/dates.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain",alignSelf:"center" }} />
                                     <Text style={styles.insideText}>
                                         Start and end dates also must be specified and keep in mind that start date must be smaller than the end date !
                                     </Text>
@@ -108,9 +108,45 @@ export default class about extends React.Component {
                             </View>
                             <View  >
                                 <Card >
-                                <Image source={require('../img/period.jpg')} style={{ height: '86%', width: '100%' , resizeMode:"contain" }} />
+                                <Image source={require('../img/period.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain",alignSelf:"center" }} />
                                     <Text style={styles.insideText}>
                                         Period is where you specify whether you train your set daily , weekly , monthly or yearly . Remember that forecast process time will increase as you go yearly to daily ! After specified all parameters 'Go!' button is ready to Go!!!
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View  >
+                                <Card >
+                                <Image source={require('../img/arimaresult.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain",alignSelf:"center" }} />
+                                    <Text style={styles.insideText}>
+                                        Here is an example resut for ARIMA ! You can zoom in , zoom out or check predicted and actaul values just like every feature in plotly python
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View >
+                                <Card >
+                                <Image source={require('../img/traderstock.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain",alignSelf:"center" }} />
+                                    <Text style={styles.insideText}>
+                                    Trade Robot is an simulator which makes buys and sells according to technical indicators and various algorithms. On market select section for Trade Robot you can select multiple stock markets.
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View  >
+                                <Card >
+                                <Image source={require('../img/dates.jpg')} style={{ height: '90%', width: '95%' , resizeMode:"contain",alignSelf:"center" }} />
+                                    <Text style={styles.insideText}>
+                                        Start and end dates also work the same way with ARIMA and LSTM dates, it must be specified and again keep in mind that start date must be smaller than the end date !
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View >
+                                <Card >
+                                <Image source={require('../img/budget.jpg')} style={{ height: '90%', width: '95%' ,resizeMode:"contain", alignSelf:"center"}} />
+                                    <Text style={styles.insideText}>
+                                    Budget is where you specify your initial budget for starting Trade Robot. Minimum budget is $5000 and max is $100000.
                                     </Text>
 
                                 </Card>
@@ -235,8 +271,7 @@ const styles = StyleSheet.create({
          fontFamily: 'opensans-regular',
          textAlign: "center",
          color: 'white',
-         bottom: 20,
-         marginTop: 8,
+         bottom:22,
          fontSize: 15,
          fontWeight: "bold"
     }
