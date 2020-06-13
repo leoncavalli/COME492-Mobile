@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, ImageBackground, ScrollView, Dimensions,ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, StyleSheet, Image, TouchableWithoutFeedback, ScrollView, Dimensions,ActivityIndicator } from 'react-native';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Card, Button } from 'react-native-elements'
@@ -89,7 +89,7 @@ export default class arimaModel extends React.Component {
                 
             })
             .catch((error) => {
-                if (this.state.dateStart == 0 || this.state.dateEnd == 0 || this.state.stockName == 0 || this.state.periodType == 0) {
+                if (this.state.dateStart == this.state.currentdate || this.state.dateEnd == this.state.currentdate || this.state.stockName == 0 || this.state.periodType == 0) {
                     alert("Please select all informations")
                     this.setState({isLoading:false})
                     return
@@ -109,7 +109,7 @@ export default class arimaModel extends React.Component {
         if (assetsLoaded) {
             return (
 
-                <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                <KeyboardAvoidingView behavior="padding" style={styles.container} >
                      <AnimatedLoader
                         visible={this.state.isLoading}
                         overlayColor="rgba(255,255,255,0.75)"
@@ -195,7 +195,7 @@ export default class arimaModel extends React.Component {
                                         End Date</Text>
                                     <DatePicker
                                         style={{ width: '80%', alignSelf: "center" }}
-                                        date={this.state.dateEnd}
+                                        date={null}
                                         mode="date"
                                         format="DD/MM/YYYY"
                                         minDate="01/05/2000"
@@ -272,6 +272,7 @@ export default class arimaModel extends React.Component {
                         </View>
 
                     </Swiper>
+                   
                 </KeyboardAvoidingView>
 
 

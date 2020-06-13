@@ -90,7 +90,7 @@ export default class arimaModel extends React.Component {
 
             })
             .catch((error) => {
-                if (this.state.dateStart == 0 || this.state.dateEnd == 0 || this.state.stockName == 0 || this.state.periodType == 0) {
+                if (this.state.dateStart == this.state.currentdate || this.state.dateEnd == this.state.currentdate || this.state.stockName == 0 || this.state.periodType == 0) {
                     alert("Please select all informations")
                     this.setState({isLoading:false})
                     return
