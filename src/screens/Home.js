@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import * as Font from 'expo-font';
 import Constants from 'expo-constants';
+import { Card, Button } from 'react-native-elements'
 
 
 
@@ -47,13 +48,43 @@ export default class Home extends React.Component {
                                 <Text style={styles.headerText} >What is FinAI?</Text>
                             </View>
                             <View style={styles.infoWrapper}>
-                            <Text style={styles.infoText}>
-                                Fin AI is an abbreviaton of Finance on Artificial
-                                 Intelligence.We are creating machine learning models to
-                                 see the effects of AI in finance markets.
+                                <Text style={styles.infoText}>
+                                    Fin AI is an abbreviaton of Finance on Artificial
+                                    Intelligence.We are creating machine learning models to
+                                    see the effects of AI in finance markets.
                             </Text>
                             </View>
                         </LinearGradient>
+                        <Card>
+                            <Image source={require('../img/analysis.png')} style={{ width: 130, height: 130, alignSelf: "center" }} />
+
+                            <View style={styles.headerWrapper}>
+
+                                <Text style={styles.headerText2} >Analyze</Text>
+                            </View>
+                            <Text style={styles.cardText}>Analyzing the data as important as creating a model.The system analyzes the data first.</Text>
+
+                        </Card>
+                        <Card>
+                            <Image source={require('../img/learning.png')} style={{ width: 130, height: 130, alignSelf: "center" }} />
+
+                            <View style={styles.headerWrapper}>
+
+                                <Text style={styles.headerText2} >Fit Model</Text>
+                            </View>
+                            <Text style={styles.cardText}>Analyzed data is fitted to model.We present you the ARIMA and LSTM for now.</Text>
+
+                        </Card>
+                        <Card>
+                            <Image source={require('../img/data-analysis.png')} style={{ width: 130, height: 130, alignSelf: "center" }} />
+
+                            <View style={styles.headerWrapper}>
+
+                                <Text style={styles.headerText2}>Predict</Text>
+                            </View>
+                            <Text style={styles.cardText}>System runs the code behind and shows you the graph which contains actual and predicted.</Text>
+
+                        </Card>
                     </ScrollView>
                 </SafeAreaView>
             )
@@ -77,6 +108,14 @@ const styles = StyleSheet.create({
         flex: 1,
         height: hp('80%'),
         resizeMode: 'contain'
+    },
+    cardText: {
+        textAlign: "center",
+        color: 'black',
+        fontSize: 25,
+        fontFamily: 'opensans-light',
+        paddingVertical: 10
+
     },
     scrollView: {
         backgroundColor: 'white',
@@ -104,15 +143,21 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderBottomColor: '#2cbab2',
     },
-    infoWrapper:{
-        width:wp('90%'),
-        alignSelf:"center",
-        marginTop:20
+    headerText2: {
+        fontFamily: 'opensans-bold',
+        fontSize: 35, color: 'black',
+        textAlign: "center",
+        borderBottomColor: '#2cbab2',
     },
-    infoText:{
-        color:'white',
-        fontFamily:'opensans-regular',
-        textAlign:"center",
-        fontSize:25
+    infoWrapper: {
+        width: wp('90%'),
+        alignSelf: "center",
+        marginTop: 20
+    },
+    infoText: {
+        color: 'white',
+        fontFamily: 'opensans-regular',
+        textAlign: "center",
+        fontSize: 25
     },
 });

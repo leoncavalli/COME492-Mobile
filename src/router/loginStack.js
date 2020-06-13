@@ -72,9 +72,8 @@ function ModelStackScreen() {
 function MyTabs() {
     return (
         <Tab.Navigator  
-            shifting={false}
             activeColor={'white'}
-            barStyle={{backgroundColor:'#64a19d'}}
+            barStyle={{borderRadius:15}}
             
 
             screenOptions={({ route }) => ({
@@ -83,31 +82,31 @@ function MyTabs() {
                     let iconName;
                     let color;
                     if (route.name === 'Home') {
-                        color= focused ? 'black' :'white';
+                        color= 'white';
                         iconName = 'home';
                     } else if (route.name === 'Models') {
-                        color= focused ? 'black' :'white';
+                        color='white';
 
                         iconName ='chart-bar';
                     }
                     else if(route.name==="Trade Robot"){
-                        color= focused ? 'black' :'white';
+                        color='white';
 
                         iconName='bolt'
                     }
                     else{
-                        color= focused ? 'black' :'white';
+                        color='white';
 
                         iconName='user'
                     }
-                    return <FontAwesome5 name={iconName} size={22} color={color} />;
+                    return <FontAwesome5 name={iconName} size={23} color={color} />;
                 },
             })}
             >
-            <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Models" component={ModelStackScreen} />
-            <Tab.Screen name="Trade Robot" component={TradeStackScreen} />
-            <Tab.Screen name="About" component={AboutStackScreen} />
+            <Tab.Screen name="Home" component={HomeStackScreen} options={{tabBarColor:'#A6A6A6'}} />
+            <Tab.Screen name="Models" component={ModelStackScreen} options={{tabBarColor:'#2A5B61'}} />
+            <Tab.Screen name="Trade Robot" component={TradeStackScreen} options={{tabBarColor:'#FFA500'}}/>
+            <Tab.Screen name="About" component={AboutStackScreen} options={{tabBarColor:'#2C93AB'}}/>
         </Tab.Navigator>
     );
 }

@@ -20,13 +20,13 @@ export default class welcome extends React.Component {
         this.state = {
             dateStart: currentdate,
             dateEnd: currentdate,
-            budget:5000,
+            budget: 5000,
             minimumValue: 5000,
             maximumValue: 100000,
             selectedItems: [],
-            finalData:[],
-            isLoading : false
-            
+            finalData: [],
+            isLoading: false
+
         }
     }
     state = {
@@ -49,7 +49,7 @@ export default class welcome extends React.Component {
     }
     postData = async () => {
         this.setState({
-            isLoading:true
+            isLoading: true
         })
 
         fetch('http://192.168.1.39:8000/simpleapi3/', {
@@ -65,18 +65,18 @@ export default class welcome extends React.Component {
             }
             )
         }).then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState({ finalData:responseJson})
-                    this.setState({isLoading:false})
-                }).then(()=>{
-                this.props.navigation.navigate('TradeResult', { finalData: this.state.finalData, initBudget:this.state.budget})
+            .then((responseJson) => {
+                this.setState({ finalData: responseJson })
+                this.setState({ isLoading: false })
+            }).then(() => {
+                this.props.navigation.navigate('TradeResult', { finalData: this.state.finalData, initBudget: this.state.budget })
 
             })
             .catch((error) => {
-               
-                if (this.state.selectedItems == 0 || this.state.budget == 0 ) {
+
+                if (this.state.selectedItems == 0 || this.state.budget == 0) {
                     alert("Please select all informations")
-                    this.setState({isLoading:false})
+                    this.setState({ isLoading: false })
                     return
                 };
             })
@@ -101,36 +101,30 @@ export default class welcome extends React.Component {
                                     STOCKS</Text>
                             </View>
                             <Card height={hp('60%')} >
-                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
-
-                                <View style={{ height: '50%' }} >
-
+                                <View style={{ height: '50%', zIndex: 100 }} >
                                     <DropDownPicker
                                         items={customData.map((s) => (
                                             { label: s.Name, value: s.Symbol }
                                         ))}
-                                        defaultValue={null}
-                                        placeholder='Select stock market(s)'
+
+                                        dropDownMaxHeight={hp('45%')}
                                         multiple={true}
                                         multipleText="%d stocks have been selected."
                                         min={0}
                                         max={10}
                                         searchable={true}
+                                        searchableStyle={{ fontSize: 20, color: '#a6a6a6' }}
+                                        defaultValue={this.state.country}
                                         containerStyle={{ height: 50, marginTop: hp('1%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}
-
                                         dropDownStyle={{ borderColor: '#2cbab2', backgroundColor: '#fafafa', paddingHorizontal: 15, paddingVertical: 0 }}
                                         onChangeItem={item => this.setState({
                                             selectedItems: item
                                         })}
                                     />
-
-
-
-
                                 </View>
-
+                                <Image source={require('../img/fieldset3.png')} style={{ width: '90%', height: '50%', alignSelf: "center" }} />
                             </Card>
 
                         </View>
@@ -226,8 +220,12 @@ export default class welcome extends React.Component {
                                     maximumValue={this.state.maximumValue}
                                     minimumValue={this.state.minimumValue}
                                     value={this.state.minimumValue}
-                                    onValueChange={val => this.setState({ budget: val })}
-
+                                    onValueChange={value => {
+                                        clearTimeout(this.sliderTimeoutId)
+                                        this.sliderTimeoutId = setTimeout(() => {
+                                            this.setState({ budget: value })
+                                        }, 100)
+                                    }}
                                     thumbTintColor='#2cbab2'
                                     maximumTrackTintColor='#d3d3d3'
                                     minimumTrackTintColor='#2cbab2'
@@ -364,5 +362,5 @@ const styles = StyleSheet.create({
     lottie: {
         width: wp('20%'),
         height: hp('20%'),
-      }
+    }
 });
