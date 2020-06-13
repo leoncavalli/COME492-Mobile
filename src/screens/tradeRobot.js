@@ -52,7 +52,7 @@ export default class welcome extends React.Component {
             isLoading: true
         })
 
-        fetch('http://192.168.1.39:8000/simpleapi3/', {
+        fetch('http://192.168.2.229:8000/simpleapi3/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -61,7 +61,9 @@ export default class welcome extends React.Component {
             body: JSON.stringify({
 
                 "selectedItems": this.state.selectedItems,
-                "budget": this.state.budget
+                "budget": this.state.budget,
+                "fromdate":this.state.dateStart,
+                "todate":this.state.dateEnd
             }
             )
         }).then((response) => response.json())
@@ -114,7 +116,8 @@ export default class welcome extends React.Component {
                                         max={10}
                                         searchable={true}
                                         searchableStyle={{ fontSize: 20, color: '#a6a6a6' }}
-                                        defaultValue={this.state.country}
+                                        defaultValue={null}
+                                        placeholder='Select stock market(s)'
                                         containerStyle={{ height: 50, marginTop: hp('1%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}

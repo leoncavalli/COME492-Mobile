@@ -64,7 +64,7 @@ export default class about extends React.Component {
                             </View>
                             <View style={styles.infoWrapper}>
                             <Text style={styles.infoText}>
-                                As Fin AI we provide you two machine learning methods ARIMA and LSTM which are used to forecast future values and also a Trade Robot
+                                As Fin AI we provide you two machine learning methods ARIMA and LSTM which are used to forecast future values and also a Trade Robot.
                             </Text>
                             </View>
                         <Swiper style={{height:hp('80%')}}>
