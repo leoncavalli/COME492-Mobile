@@ -8,7 +8,7 @@ import DatePicker from 'react-native-datepicker'
 import Swiper from 'react-native-swiper'
 import { LinearGradient } from 'expo-linear-gradient';
 import DropDownPicker from 'react-native-dropdown-picker';
-
+import AnimatedLoader from "react-native-animated-loader";
 import * as Font from 'expo-font';
 
 
@@ -32,7 +32,8 @@ export default class arimaModel extends React.Component {
             selectedItems: [],
             data:[],
             array:[],
-            layout:[]
+            layout:[],
+            isLoading : false
         })
     }
     state = {
@@ -53,9 +54,11 @@ export default class arimaModel extends React.Component {
     }
 
     postData = async () => {
+        this.setState({
+            isLoading:true
+        })
 
-
-        fetch('http://192.168.2.229:8000/simpleapi2/', {
+        fetch('http://192.168.1.39:8000/simpleapi2/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -77,7 +80,7 @@ export default class arimaModel extends React.Component {
                
                     this.setState({ array: responseJson.data })
                     this.setState({ layout: responseJson.layout })
-
+                    this.setState({isLoading:false})
              
 
             }).then(()=>{
@@ -88,6 +91,7 @@ export default class arimaModel extends React.Component {
             .catch((error) => {
                 if (this.state.dateStart == 0 || this.state.dateEnd == 0 || this.state.stockName == 0 || this.state.periodType == 0) {
                     alert("Please select all informations")
+                    this.setState({isLoading:false})
                     return
                 }
             })
@@ -106,6 +110,12 @@ export default class arimaModel extends React.Component {
             return (
 
                 <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                     <AnimatedLoader
+                        visible={this.state.isLoading}
+                        overlayColor="rgba(255,255,255,0.75)"
+                        animationStyle={styles.lottie}
+                        speed={1}
+                    />
                     <Swiper loop={false} >
                         <View>
                             <View>
@@ -377,5 +387,9 @@ const styles = StyleSheet.create({
         marginBottom: 3,
         fontSize: 17,
         alignSelf:'center'
-    }
+    },
+    lottie: {
+        width: wp('20%'),
+        height: hp('20%'),
+      }
 });

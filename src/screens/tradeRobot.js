@@ -10,7 +10,7 @@ import Swiper from 'react-native-swiper'
 import { LinearGradient } from 'expo-linear-gradient';
 import MultiSelect from 'react-native-multiple-select';
 import DatePicker from 'react-native-datepicker'
-
+import AnimatedLoader from "react-native-animated-loader";
 const customData = require('../shared/bist100.json');
 export default class welcome extends React.Component {
     constructor(props) {
@@ -20,11 +20,12 @@ export default class welcome extends React.Component {
         this.state = {
             dateStart: currentdate,
             dateEnd: currentdate,
-            budget:0,
+            budget:5000,
             minimumValue: 5000,
             maximumValue: 100000,
             selectedItems: [],
             finalData:[],
+            isLoading : false
             
         }
     }
@@ -47,9 +48,11 @@ export default class welcome extends React.Component {
         this.setState({ assetsLoaded: true });
     }
     postData = async () => {
+        this.setState({
+            isLoading:true
+        })
 
-
-        fetch('http://192.168.2.229:8000/simpleapi3/', {
+        fetch('http://192.168.1.39:8000/simpleapi3/', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -64,13 +67,18 @@ export default class welcome extends React.Component {
         }).then((response) => response.json())
                 .then((responseJson) => {
                     this.setState({ finalData:responseJson})
+                    this.setState({isLoading:false})
                 }).then(()=>{
                 this.props.navigation.navigate('TradeResult', { finalData: this.state.finalData, initBudget:this.state.budget})
 
             })
             .catch((error) => {
                
-                console.error(error);
+                if (this.state.selectedItems == 0 || this.state.budget == 0 ) {
+                    alert("Please select all informations")
+                    this.setState({isLoading:false})
+                    return
+                };
             })
     }
     render() {
@@ -80,6 +88,12 @@ export default class welcome extends React.Component {
         if (assetsLoaded) {
             return (
                 <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                    <AnimatedLoader
+                        visible={this.state.isLoading}
+                        overlayColor="rgba(255,255,255,0.75)"
+                        animationStyle={styles.lottie}
+                        speed={1}
+                    />
                     <Swiper loop={false} >
                         <View>
                             <View>
@@ -95,13 +109,13 @@ export default class welcome extends React.Component {
                                         items={customData.map((s) => (
                                             { label: s.Name, value: s.Symbol }
                                         ))}
-
+                                        defaultValue={null}
+                                        placeholder='Select stock market(s)'
                                         multiple={true}
                                         multipleText="%d stocks have been selected."
                                         min={0}
                                         max={10}
                                         searchable={true}
-                                        defaultValue={this.state.country}
                                         containerStyle={{ height: 50, marginTop: hp('1%') }}
                                         style={{ backgroundColor: '#fafafa' }}
                                         labelStyle={{ fontFamily: 'opensans-regular', fontSize: 18, color: '#0b0b0b', textAlign: 'center' }}
@@ -346,5 +360,9 @@ const styles = StyleSheet.create({
         opacity: 1,
         marginTop: 3,
         fontSize: 20,
-    }
+    },
+    lottie: {
+        width: wp('20%'),
+        height: hp('20%'),
+      }
 });
