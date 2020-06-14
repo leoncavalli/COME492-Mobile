@@ -1,371 +1,286 @@
 [
- {
-   "Symbol": "AEFES",
-   "Name": "ANADOLU EFES"
- },
- {
-   "Symbol": "AFYON",
-   "Name": "AFYON ÇİMENTO"
- },
- {
-   "Symbol": "AKBNK",
-   "Name": "AKBANK"
- },
- {
-   "Symbol": "AKENR",
-   "Name": "AK ENERJİ"
- },
- {
-   "Symbol": "ALBRK",
-   "Name": "ALBARAKA TÜRK "
- },
- {
-   "Symbol": "AKSA",
-   "Name": "AKSA"
- },
- {
-   "Symbol": "AKSEN",
-   "Name": "AKSA ENERJİ"
- },
- {
-   "Symbol": "ALARK",
-   "Name": "ALARKO HOLDİNG"
- },
- {
-   "Symbol": "ANSGR",
-   "Name": "ANADOLU SİGORTA"
- },
- {
-   "Symbol": "ARCLK",
-   "Name": "ARÇELİK"
- },
- {
-   "Symbol": "ASELS",
-   "Name": "ASELSAN"
- },
- {
-   "Symbol": "ANACM",
-   "Name": "ANADOLU CAM SANAYİ A.Ş"
- },
- {
-   "Symbol": "BIMAS",
-   "Name": "BİM MAĞAZALAR"
- },
- {
-   "Symbol": "BJKAS",
-   "Name": "BEŞİKTAŞ FUTBOL YAT."
- },
- {
-   "Symbol": "BERA",
-   "Name": "BERA HOLDİNG A.Ş"
- },
- {
-   "Symbol": "DEVA",
-   "Name": "DEVA HOLDİNG"
- },
- {
-   "Symbol": "DOHOL",
-   "Name": "DOĞAN HOLDİNG"
- },
- {
-   "Symbol": "ECILC",
-   "Name": "ECZACIBAŞI İLAÇ"
- },
- {
-   "Symbol": "ECZYT",
-   "Name": "ECZACIBAŞI YATIRIM"
- },
- {
-   "Symbol": "EKGYO",
-   "Name": "EMLAK KONUT GMYO"
- },
- {
-   "Symbol": "ENKAI",
-   "Name": "ENKA İNŞAAT"
- },
- {
-   "Symbol": "EREGL",
-   "Name": "EREĞLİ DEMİR CELİK"
- },
- {
-   "Symbol": "FENER",
-   "Name": "FENERBAHÇE SPORTİF"
- },
- {
-   "Symbol": "FROTO",
-   "Name": "FORD OTOSAN"
- },
- {
-   "Symbol": "GARAN",
-   "Name": "GARANTİ BANKASI"
- },
- {
-   "Symbol": "GLYHO",
-   "Name": "GLOBAL YAT. HOLDİNG"
- },
- {
-   "Symbol": "GOLDS",
-   "Name": "GOLDAS KUYUMCULUK"
- },
- {
-   "Symbol": "GOLTS",
-   "Name": "GÖLTAŞ ÇİMENTO"
- },
- {
-   "Symbol": "GOODY",
-   "Name": "GOOD-YEAR"
- },
- {
-   "Symbol": "GOZDE",
-   "Name": "GÖZDE GİRİŞİM"
- },
- {
-   "Symbol": "GSDHO",
-   "Name": "GSD HOLDİNG"
- },
- {
-   "Symbol": "GSRAY",
-   "Name": "GALATASARAY SPORTİF"
- },
- {
-   "Symbol": "GUBRF",
-   "Name": "GÜBRE FABRİKALARI"
- },
- {
-   "Symbol": "HALKB",
-   "Name": "T. HALK BANKASI"
- },
- {
-   "Symbol": "HURGZ",
-   "Name": "HÜRRİYET GZT."
- },
- {
-   "Symbol": "IHEVA",
-   "Name": "İHLAS EV ALETLERİ"
- },
- {
-   "Symbol": "IHLAS",
-   "Name": "İHLAS HOLDİNG"
- },
- 
- {
-   "Symbol": "IPEKE",
-   "Name": "İPEK DOĞAL ENERJİ"
- },
- {
-   "Symbol": "ISCTR",
-   "Name": "İŞ BANKASI (C)"
- },
- {
-   "Symbol": "ISFIN",
-   "Name": "İŞ FİN.KİR."
- },
- {
-   "Symbol": "ISGYO",
-   "Name": "İŞ GMYO"
- },
- {
-   "Symbol": "ISYHO",
-   "Name": "IŞIKLAR YAT. HOLDİNG"
- },
- {
-   "Symbol": "ITTFH",
-   "Name": "İTTİFAK HOLDİNG"
- },
- {
-   "Symbol": "IZMDC",
-   "Name": "İZMİR DEMİR ÇELİK"
- },
- {
-   "Symbol": "KARSN",
-   "Name": "KARSAN OTOMOTİV"
- },
- {
-   "Symbol": "KARTN",
-   "Name": "KARTONSAN"
- },
- {
-   "Symbol": "KCHOL",
-   "Name": "KOÇ HOLDİNG"
- },
- {
-   "Symbol": "KILER",
-   "Name": "KİLER GIDA"
- },
- {
-   "Symbol": "KLGYO",
-   "Name": "KİLER GMYO"
- },
- {
-   "Symbol": "KONYA",
-   "Name": "KONYA ÇİMENTO"
- },
- {
-   "Symbol": "KOZAA",
-   "Name": "KOZA MADENCİLİK"
- },
- {
-   "Symbol": "KOZAL",
-   "Name": "KOZA ALTIN"
- },
- {
-   "Symbol": "KRDMD",
-   "Name": "KARDEMİR (D)"
- },
- {
-   "Symbol": "METRO",
-   "Name": "METRO HOLDİNG"
- },
- {
-   "Symbol": "MGROS",
-   "Name": "MİGROS TİCARET"
- },
- {
-   "Symbol": "MPARK",
-   "Name": "MLP SAĞLIK HİZMETLERİ"
- },
- {
-   "Symbol": "NETAS",
-   "Name": "NETAŞ TELEKOM."
- },
- {
-   "Symbol": "NTHOL",
-   "Name": "NET HOLDİNG"
- },
- {
-   "Symbol": "NTTUR",
-   "Name": "NET TURİZM"
- },
- {
-   "Symbol": "OTKAR",
-   "Name": "OTOKAR"
- },
- {
-   "Symbol": "PRKME",
-   "Name": "PARK ELEK.MADENCİLİK"
- },
- {
-   "Symbol": "PARSN",
-   "Name": "PARSAN MAKİNA SANAYİ"
- },
- {
-   "Symbol": "PETKM",
-   "Name": "PETKİM"
- },
- {
-   "Symbol": "PGSUS",
-   "Name": "PEGASUS HAVA TAŞIMACILIĞI"
- },
- {
-   "Symbol": "POLHO",
-   "Name": "POLİSAN HOLDİNG"
- },
- {
-   "Symbol": "SASA",
-   "Name": "SASA POLYESTER"
- },
- {
-   "Symbol": "SISE",
-   "Name": "ŞİŞE CAM"
- },
- {
-   "Symbol": "SKBNK",
-   "Name": "ŞEKERBANK"
- },
- {
-   "Symbol": "SODA",
-   "Name": "SODA SANAYİ A.Ş"
- },
- {
-   "Symbol": "SOKM",
-   "Name": "ŞOK MARKETLER"
- },
- {
-   "Symbol": "TAVHL",
-   "Name": "TAV HAVALİMANLARI"
- },
- {
-   "Symbol": "TCELL",
-   "Name": "TURKCELL"
- },
- {
-   "Symbol": "TEKST",
-   "Name": "TEKSTİLBANK"
- },
- {
-   "Symbol": "TEKTU",
-   "Name": "TEK-ART TURİZM"
- },
- {
-   "Symbol": "THYAO",
-   "Name": "TÜRK HAVA YOLLARI"
- },
- {
-   "Symbol": "TIRE",
-   "Name": "MONDİ TİRE KUTSAN"
- },
- {
-   "Symbol": "TKFEN",
-   "Name": "TEKFEN HOLDİNG"
- },
- {
-   "Symbol": "TOASO",
-   "Name": "TOFAŞ OTO. FAB."
- },
- {
-   "Symbol": "TRCAS",
-   "Name": "TURCAS PETROL"
- },
- {
-   "Symbol": "TRGYO",
-   "Name": "TORUNLAR GMYO"
- },
- {
-   "Symbol": "TRKCM",
-   "Name": "TRAKYA CAM"
- },
- {
-   "Symbol": "TSKB",
-   "Name": "T.S.K.B."
- },
- {
-   "Symbol": "TSPOR",
-   "Name": "TRABZONSPOR SPORTİF"
- },
- {
-   "Symbol": "TTKOM",
-   "Name": "TÜRK TELEKOM"
- },
- {
-   "Symbol": "TTRAK",
-   "Name": "TÜRK TRAKTÖR"
- },
- {
-   "Symbol": "TUPRS",
-   "Name": "TÜPRAŞ"
- },
- {
-   "Symbol": "ULKER",
-   "Name": "ÜLKER GIDA"
- },
- {
-   "Symbol": "VAKBN",
-   "Name": "VAKIFLAR BANKASI"
- },
- {
-   "Symbol": "VESTL",
-   "Name": "VESTEL"
- },
- {
-   "Symbol": "YKBNK",
-   "Name": "YAPI VE KREDİ BANK."
- },
- {
-   "Symbol": "YATAS",
-   "Name": "YATAŞ"
- },
- {
-   "Symbol": "ZOREN",
-   "Name": "ZORLU ENERJİ"
- }
+  {
+    "Symbol": "AEFES",
+    "Name": "ANADOLU EFES"
+  },
+  {
+    "Symbol": "AFYON",
+    "Name": "AFYON ÇİMENTO"
+  },
+  {
+    "Symbol": "AKBNK",
+    "Name": "AKBANK"
+  },
+  {
+    "Symbol": "ALBRK",
+    "Name": "ALBARAKA TÜRK"
+  },
+  {
+    "Symbol": "AKSA",
+    "Name": "AKSA"
+  },
+  {
+    "Symbol": "AKSEN",
+    "Name": "AKSA ENERJİ"
+  },
+  {
+    "Symbol": "ALARK",
+    "Name": "ALARKO HOLDİNG"
+  },
+  {
+    "Symbol": "ANSGR",
+    "Name": "ANADOLU SİGORTA"
+  },
+  {
+    "Symbol": "ARCLK",
+    "Name": "ARÇELİK"
+  },
+  {
+    "Symbol": "ASELS",
+    "Name": "ASELSAN"
+  },
+  {
+    "Symbol": "ANACM",
+    "Name": "ANADOLU CAM SANAYİ A.Ş"
+  },
+  {
+    "Symbol": "BIMAS",
+    "Name": "BİM MAĞAZALAR"
+  },
+  {
+    "Symbol": "BJKAS",
+    "Name": "BEŞİKTAŞ FUTBOL YAT."
+  },
+  {
+    "Symbol": "BERA",
+    "Name": "BERA HOLDİNG A.Ş"
+  },
+  {
+    "Symbol": "DEVA",
+    "Name": "DEVA HOLDİNG"
+  },
+  {
+    "Symbol": "DOHOL",
+    "Name": "DOĞAN HOLDİNG"
+  },
+  {
+    "Symbol": "ECILC",
+    "Name": "ECZACIBAŞI İLAÇ"
+  },
+  {
+    "Symbol": "ECZYT",
+    "Name": "ECZACIBAŞI YATIRIM"
+  },
+  {
+    "Symbol": "EKGYO",
+    "Name": "EMLAK KONUT GMYO"
+  },
+  {
+    "Symbol": "ENKAI",
+    "Name": "ENKA İNŞAAT"
+  },
+  {
+    "Symbol": "EREGL",
+    "Name": "EREĞLİ DEMİR CELİK"
+  },
+  {
+    "Symbol": "FENER",
+    "Name": "FENERBAHÇE SPORTİF"
+  },
+  {
+    "Symbol": "FROTO",
+    "Name": "FORD OTOSAN"
+  },
+  {
+    "Symbol": "GARAN",
+    "Name": "GARANTİ BBVA"
+  },
+  {
+    "Symbol": "GLYHO",
+    "Name": "GLOBAL YAT. HOLDİNG"
+  },
+  {
+    "Symbol": "GOLTS",
+    "Name": "GÖLTAŞ ÇİMENTO"
+  },
+  {
+    "Symbol": "GOODY",
+    "Name": "GOOD-YEAR"
+  },
+  {
+    "Symbol": "GOZDE",
+    "Name": "GÖZDE GİRİŞİM"
+  },
+  {
+    "Symbol": "GSDHO",
+    "Name": "GSD HOLDİNG"
+  },
+  {
+    "Symbol": "GSRAY",
+    "Name": "GALATASARAY SPORTİF"
+  },
+  {
+    "Symbol": "GUBRF",
+    "Name": "GÜBRE FABRİKALARI"
+  },
+  {
+    "Symbol": "HURGZ",
+    "Name": "HÜRRİYET GZT."
+  },
+  {
+    "Symbol": "IHLAS",
+    "Name": "İHLAS HOLDİNG"
+  },
+  {
+    "Symbol": "IPEKE",
+    "Name": "İPEK DOĞAL ENERJİ"
+  },
+  {
+    "Symbol": "ISCTR",
+    "Name": "İŞ BANKASI (C)"
+  },
+  {
+    "Symbol": "ISGYO",
+    "Name": "İŞ GMYO"
+  },
+  {
+    "Symbol": "ITTFH",
+    "Name": "İTTİFAK HOLDİNG"
+  },
+  {
+    "Symbol": "KARSN",
+    "Name": "KARSAN OTOMOTİV"
+  },
+  {
+    "Symbol": "KCHOL",
+    "Name": "KOÇ HOLDİNG"
+  },
+  {
+    "Symbol": "KOZAA",
+    "Name": "KOZA ANADOLU MADENCİLİK"
+  },
+  {
+    "Symbol": "KOZAL",
+    "Name": "KOZA ALTIN"
+  },
+  {
+    "Symbol": "KRDMD",
+    "Name": "KARDEMİR (D)"
+  },
+  {
+    "Symbol": "METRO",
+    "Name": "METRO HOLDİNG"
+  },
+  {
+    "Symbol": "MGROS",
+    "Name": "MİGROS TİCARET"
+  },
+  {
+    "Symbol": "MPARK",
+    "Name": "MLP SAĞLIK HİZMETLERİ"
+  },
+  {
+    "Symbol": "NETAS",
+    "Name": "NETAŞ TELEKOM."
+  },
+  {
+    "Symbol": "OTKAR",
+    "Name": "OTOKAR"
+  },
+  {
+    "Symbol": "PRKME",
+    "Name": "PARK ELEK.MADENCİLİK"
+  },
+  {
+    "Symbol": "PARSN",
+    "Name": "PARSAN MAKİNA SANAYİ"
+  },
+  {
+    "Symbol": "PETKM",
+    "Name": "PETKİM"
+  },
+  {
+    "Symbol": "PGSUS",
+    "Name": "PEGASUS HAVA TAŞIMACILIĞI"
+  },
+  {
+    "Symbol": "POLHO",
+    "Name": "POLİSAN HOLDİNG"
+  },
+  {
+    "Symbol": "SASA",
+    "Name": "SASA POLYESTER"
+  },
+  {
+    "Symbol": "SISE",
+    "Name": "ŞİŞE CAM"
+  },
+  {
+    "Symbol": "SKBNK",
+    "Name": "ŞEKERBANK"
+  },
+  {
+    "Symbol": "SODA",
+    "Name": "SODA SANAYİ A.Ş"
+  },
+  {
+    "Symbol": "SOKM",
+    "Name": "ŞOK MARKETLER"
+  },
+  {
+    "Symbol": "TAVHL",
+    "Name": "TAV HAVALİMANLARI"
+  },
+  {
+    "Symbol": "TCELL",
+    "Name": "TURKCELL"
+  },
+  {
+    "Symbol": "THYAO",
+    "Name": "TÜRK HAVA YOLLARI"
+  },
+  {
+    "Symbol": "TKFEN",
+    "Name": "TEKFEN HOLDİNG"
+  },
+  {
+    "Symbol": "TOASO",
+    "Name": "TOFAŞ OTO. FAB."
+  },
+  {
+    "Symbol": "TRKCM",
+    "Name": "TRAKYA CAM"
+  },
+  {
+    "Symbol": "TTKOM",
+    "Name": "TÜRK TELEKOM"
+  },
+  {
+    "Symbol": "TUPRS",
+    "Name": "TÜPRAŞ"
+  },
+  {
+    "Symbol": "ULKER",
+    "Name": "ÜLKER GIDA"
+  },
+  {
+    "Symbol": "VAKBN",
+    "Name": "VAKIFLAR BANKASI"
+  },
+  {
+    "Symbol": "VESTL",
+    "Name": "VESTEL"
+  },
+  {
+    "Symbol": "YKBNK",
+    "Name": "YAPI VE KREDİ BANK."
+  },
+  {
+    "Symbol": "YATAS",
+    "Name": "YATAŞ"
+  },
+  {
+    "Symbol": "ZOREN",
+    "Name": "ZORLU ENERJİ"
+  }
 ]
