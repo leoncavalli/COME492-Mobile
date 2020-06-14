@@ -151,6 +151,34 @@ export default class about extends React.Component {
 
                                 </Card>
                             </View>
+                            <View >
+                                <Card >
+                                <Image source={require('../img/resulttrade.jpg')} style={{ height: 300, width: '95%' ,resizeMode:"contain", alignSelf:"center"}} />
+                                    <Text style={styles.insideText}>
+                                    Initial Budget is your beginning budget.
+                                    Final Budget is the initial money after trade robot process specified parameters by selling or holding (not includes portfolio values).
+                                    Portfolio Value is values of stock market(s) that you have selected earlier.
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View >
+                                <Card >
+                                <Image source={require('../img/budgetprofit.jpg')} style={{ height: 300, width: '95%' ,resizeMode:"contain", alignSelf:"center"}} />
+                                    <Text style={styles.insideText}>
+                                    Budget Profit shows the your account state which in profit.
+                                    </Text>
+
+                                </Card>
+                            </View>
+                            <View >
+                                <Card >
+                                <Image source={require('../img/portfolio.jpg')} style={{ height: 300, width: '95%' ,resizeMode:"contain", alignSelf:"center"}} />
+                                    <Text style={styles.insideText}>
+                                    Portfolio shows if there is(are) any stock left in your portfolio the distribution of stocks in pie chart.                                    </Text>
+
+                                </Card>
+                            </View>
                         </Swiper>
                         <TouchableOpacity onPress={() => this.signOutUser()} style={styles.buttonContainer1}>
                             <Text style={styles.buttonText1}>Log Out</Text>
